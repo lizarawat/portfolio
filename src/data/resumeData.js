@@ -357,27 +357,39 @@ export const education = [
 
 export const achievements = [
   {
-    title: "350+ DSA Problems Solved",
+    title: "350+ Data Structures & Algorithms Problems Solved",
     organization: "LeetCode & GeeksforGeeks",
     period: "Present",
-    desc: "Strengthened core computer science fundamentals across arrays, trees, graph algorithms, dynamic programming, and Big-O efficiency."
+    desc: "Solved 350+ Data Structures & Algorithms problems across LeetCode & GeeksforGeeks, strengthening algorithmic efficiency and problem-solving skills while focusing on arrays, trees, graphs, and dynamic programming."
   },
   {
     title: "Pre-Finalist @ AlgoArena Hackathon",
     organization: "TheEduCode by Eduniketan Private Limited",
     period: "Apr 2026",
-    desc: "Qualified for Pre-Finals in competitive coding hackathon evaluating algorithmic speed and data structure optimization."
+    desc: "Qualified for Pre-Finals at the AlgoArena Hackathon hosted on TheEduCode by Eduniketan Private Limited, evaluating algorithmic speed and data structure optimization."
   },
   {
-    title: "Organizing Member - Ensemble 2025",
+    title: "Algo Arena 2.0 Coding Competition",
+    organization: "Eduniketan / TheEduCode",
+    period: "2026",
+    desc: "Participated in Algo Arena 2.0 national coding competition solving complex data structures and algorithmic challenges."
+  },
+  {
+    title: "Cryptic Clues Hackathon",
+    organization: "Optimyzr for Success",
+    period: "2025",
+    desc: "Participated in Cryptic Clues Hackathon organized by Optimyzr for Success, focusing on logic puzzles, cryptography, and algorithmic problem-solving."
+  },
+  {
+    title: "Organizing Member — Ensemble 2025",
     organization: "Untangle & Arts/Event Management Committee",
     period: "Feb 2025",
-    desc: "Led event operations, logistics coordination, and student engagement for university-wide campus cultural festival."
+    desc: "Organized with Untangle under Arts and Event Management Committee; led event operations, logistics coordination, and student engagement for university-wide campus fest."
   },
   {
-    title: "CyberSmart Certification",
-    organization: "WNS Cares Foundation CDP",
+    title: "I Am CyberSmart Certification",
+    organization: "WNS Cares Foundation — CDP",
     period: "Aug 2025",
-    desc: "Certified in cybersecurity awareness and safe digital infrastructure practices."
+    desc: "Completed CyberSmart Community Development Project (CDP) by WNS Cares Foundation, certified in digital infrastructure security and cyber awareness."
   }
 ];
