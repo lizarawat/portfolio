@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { personalInfo } from '../data/resumeData';
-import { Mail, Phone, MapPin, Linkedin, Github, Copy, Check, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Github, Copy, Check, Send, ExternalLink } from 'lucide-react';
 
 export default function ContactSection() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
 
   const copyToClipboard = (text, type) => {
@@ -21,11 +22,21 @@ export default function ContactSection() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    setIsSubmitting(true);
+
+    // Build pre-filled mailto URL directly targeting Liza's email
+    const emailSubject = encodeURIComponent(formData.subject || `Portfolio Contact from ${formData.name}`);
+    const emailBody = encodeURIComponent(
+      `Hello Liza,\n\n${formData.message}\n\n---\nSender Details:\nName: ${formData.name}\nEmail: ${formData.email}`
+    );
+    const mailtoUrl = `mailto:${personalInfo.email}?subject=${emailSubject}&body=${emailBody}`;
+
+    // Trigger email client opening
     setTimeout(() => {
-      setFormSubmitted(false);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 4000);
+      window.location.href = mailtoUrl;
+      setIsSubmitting(false);
+      setFormSubmitted(true);
+    }, 400);
   };
 
   return (
@@ -58,7 +69,9 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <div className="text-xs font-semibold text-slate-400 uppercase">Email Address</div>
-                  <div className="text-sm font-bold text-slate-900">{personalInfo.email}</div>
+                  <a href={`mailto:${personalInfo.email}`} className="text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors">
+                    {personalInfo.email}
+                  </a>
                 </div>
               </div>
               <button
@@ -78,7 +91,9 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <div className="text-xs font-semibold text-slate-400 uppercase">Phone Number</div>
-                  <div className="text-sm font-bold text-slate-900">{personalInfo.phone}</div>
+                  <a href={`tel:${personalInfo.phone}`} className="text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors">
+                    {personalInfo.phone}
+                  </a>
                 </div>
               </div>
               <button
@@ -130,13 +145,26 @@ export default function ContactSection() {
 
           {/* Interactive Form */}
           <div className="lg:col-span-7 bg-slate-50 border border-slate-200/90 rounded-xl p-6 sm:p-8">
-            <h3 className="text-lg font-bold text-slate-900 mb-6">Send Direct Message</h3>
+            <h3 className="text-lg font-bold text-slate-900 mb-2">Send Direct Message</h3>
+            <p className="text-xs text-slate-500 mb-6">
+              Fills and opens your email application directly addressed to <strong className="text-slate-700">{personalInfo.email}</strong>.
+            </p>
             
             {formSubmitted ? (
-              <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-6 text-center space-y-2">
+              <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-6 text-center space-y-3">
                 <Check className="w-8 h-8 mx-auto text-emerald-600" />
-                <h4 className="font-bold text-base">Message Sent Successfully!</h4>
-                <p className="text-xs text-emerald-700">Thank you for reaching out. Liza will respond shortly.</p>
+                <h4 className="font-bold text-base">Opening Email Client...</h4>
+                <p className="text-xs text-emerald-700">
+                  Your message has been formatted and directed to <strong>{personalInfo.email}</strong>.
+                </p>
+                <div className="pt-2">
+                  <button
+                    onClick={() => setFormSubmitted(false)}
+                    className="text-xs font-semibold text-blue-600 hover:underline"
+                  >
+                    Send Another Message
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -191,10 +219,11 @@ export default function ContactSection() {
 
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition-all"
+                  disabled={isSubmitting}
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition-all disabled:opacity-50"
                 >
                   <Send className="w-4 h-4" />
-                  <span>Send Message</span>
+                  <span>{isSubmitting ? 'Preparing Email...' : 'Send Direct Email'}</span>
                 </button>
               </form>
             )}
