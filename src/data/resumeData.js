@@ -199,6 +199,14 @@ export const projects = [
 
 export const certifications = [
   {
+    title: "MongoDB Certified Database Administrator Path",
+    issuer: "MongoDB",
+    date: "Sep 2026",
+    credentialId: "MongoDB-DBA-2026",
+    tags: ["Databases", "NoSQL", "Indexing", "DBA"],
+    link: "https://drive.google.com/drive/folders/1MlaPGk2NMorip76oQz_WLABApUA7Bvv_?usp=sharing"
+  },
+  {
     title: "Oracle Cloud Infrastructure AI Foundations Associate",
     issuer: "Oracle University",
     date: "Jul 2026",
@@ -215,20 +223,20 @@ export const certifications = [
     link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=F8FECD775404A7E4D58F5BB4A943B22BAF50A6E4B14C056777A1628258186818"
   },
   {
-    title: "MongoDB Certified Database Administrator Path",
-    issuer: "MongoDB",
-    date: "Sep 2026",
-    credentialId: "MongoDB-DBA-2026",
-    tags: ["Databases", "NoSQL", "Indexing", "DBA"],
-    link: "https://drive.google.com/drive/folders/1MlaPGk2NMorip76oQz_WLABApUA7Bvv_?usp=sharing"
-  },
-  {
     title: "Complete Data Science, ML, DL & NLP Bootcamp (99 Hours)",
     issuer: "Udemy",
     date: "May 2026",
     credentialId: "UC-68919ddf-4ca4-4f28",
     tags: ["Machine Learning", "Deep Learning", "NLP", "Python"],
     link: "https://udemy-certificate.s3.amazonaws.com/image/UC-68919ddf-4ca4-4f28-af9b-6eaae46f2f53.jpg"
+  },
+  {
+    title: "Programming in Java",
+    issuer: "iamNeo",
+    date: "May 2026",
+    credentialId: "iamNeo-Java-2026",
+    tags: ["Java", "OOP", "Software Engineering"],
+    link: "https://lpucolab438.examly.io/certificate/U2FsdGVkX19vNpoTWvo155A2Q4UMoZeAcYJqF4a9Dsg%3D"
   },
   {
     title: "GEN AI NASSCOM - SFJ Skill Development Program",
@@ -239,6 +247,14 @@ export const certifications = [
     link: "https://drive.google.com/drive/folders/15qb-dltrK-d9B556pu3CBftItTjJEg9x"
   },
   {
+    title: "Programming Using C++",
+    issuer: "Infosys Springboard",
+    date: "Aug 2025",
+    credentialId: "Infosys-CPP-2025",
+    tags: ["C++", "Data Structures", "Algorithms"],
+    link: null
+  },
+  {
     title: "Artificial Intelligence Foundations: Machine Learning",
     issuer: "LinkedIn Learning",
     date: "Jul 2025",
@@ -247,20 +263,12 @@ export const certifications = [
     link: "https://www.linkedin.com/learning/certificates/9065a8a04872e04f7086ad92c2c97f47921d7f2cc9bbbde05557f5556e6edd11"
   },
   {
-    title: "HackerRank Certified: Python & C#",
-    issuer: "HackerRank",
-    date: "2024 - 2025",
-    credentialId: "73ddae2b7994",
-    tags: ["Python", "C#", "Algorithms"],
-    link: "https://www.hackerrank.com/certificates/73ddae2b7994"
-  },
-  {
-    title: "Programming in Java",
+    title: "C Programming (72 Hours)",
     issuer: "iamNeo",
-    date: "May 2026",
-    credentialId: "iamNeo-Java-2026",
-    tags: ["Java", "OOP", "Software Development"],
-    link: null
+    date: "May 2025",
+    credentialId: "iamNeo-C-72H",
+    tags: ["C", "Pointers", "Memory Management"],
+    link: "https://lpucolab438.examly.io/certificate/U2FsdGVkX19tpgsnvdSvcnh7LV6%2F12QcXOw4w7sexZ8%3D"
   },
   {
     title: "Introduction to AI/ML",
@@ -268,31 +276,7 @@ export const certifications = [
     date: "Mar 2025",
     credentialId: "Skillera-AIML-2025",
     tags: ["Machine Learning", "AI Fundamentals"],
-    link: null
-  },
-  {
-    title: "Introduction to AI/ML",
-    issuer: "Coursera",
-    date: "2025",
-    credentialId: "Coursera-AIML-2025",
-    tags: ["AI", "Machine Learning"],
-    link: null
-  },
-  {
-    title: "What Is Generative AI?",
-    issuer: "LinkedIn Learning",
-    date: "Jul 2025",
-    credentialId: "LIL-GenAI-2025",
-    tags: ["Generative AI", "LLMs"],
-    link: null
-  },
-  {
-    title: "Programming Using C++",
-    issuer: "Infosys Springboard",
-    date: "Aug 2025",
-    credentialId: "Infosys-CPP-2025",
-    tags: ["C++", "Data Structures", "Algorithms"],
-    link: null
+    link: "https://www.linkedin.com/posts/liza-rawat-912975352_ai-machinelearning-lifelonglearning-activity-7312874682704166912-Ye6f?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFgQad4BnTBSquJP2h3zX-XUDmABldjx9NA"
   },
   {
     title: "Basic to Beyond: Python (18 Hours)",
@@ -303,20 +287,20 @@ export const certifications = [
     link: null
   },
   {
-    title: "C Programming (72 Hours)",
-    issuer: "iamNeo",
-    date: "May 2025",
-    credentialId: "iamNeo-C-72H",
-    tags: ["C", "Pointers", "Memory Management"],
-    link: null
-  },
-  {
     title: "C for Beginners",
     issuer: "Great Learning Academy",
     date: "Dec 2024",
     credentialId: "GLA-C-2024",
     tags: ["C Programming", "Basics"],
     link: null
+  },
+  {
+    title: "HackerRank Certified: Python & C#",
+    issuer: "HackerRank",
+    date: "2024 - 2025",
+    credentialId: "73ddae2b7994",
+    tags: ["Python", "C#", "Algorithms"],
+    link: "https://www.hackerrank.com/certificates/73ddae2b7994"
   }
 ];
 
