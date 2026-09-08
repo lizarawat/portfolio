@@ -11,14 +11,14 @@ export default function Certifications() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
           <div>
             <span className="text-xs font-bold text-blue-600 uppercase tracking-widest">
-              Verified Credentials
+              Verified Credentials ({certifications.length})
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-1">
               Certifications & Industry Standards
             </h2>
           </div>
           <p className="text-sm text-slate-500 max-w-md">
-            Validated technical expertise across Cloud AI, Enterprise Data Platforms, NoSQL Databases, and Generative AI.
+            Validated technical expertise across Cloud AI, Enterprise Data Platforms, Machine Learning, and Software Development.
           </p>
         </div>
 
@@ -62,15 +62,15 @@ export default function Certifications() {
                     href={cert.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-md transition-colors font-sans"
-                    title={`Verify credential on ${cert.issuer}`}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors shadow-2xs font-sans"
+                    title={`View / Verify certificate for ${cert.title}`}
                   >
-                    <span>Verify on {cert.issuer}</span>
-                    <ExternalLink className="w-3 h-3" />
+                    <span>Verify Badge</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 ) : (
                   <span className="text-emerald-700 font-sans font-semibold flex items-center gap-1">
-                    <CheckCircle className="w-3 h-3" /> Verified
+                    <CheckCircle className="w-3.5 h-3.5" /> Verified
                   </span>
                 )}
               </div>
