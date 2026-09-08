@@ -204,7 +204,7 @@ export const certifications = [
     date: "Sep 2026",
     credentialId: "MongoDB-DBA-2026",
     tags: ["Databases", "NoSQL", "Indexing", "DBA"],
-    link: "https://linkedin.com/in/liza-rawat-912975352/details/certifications/"
+    link: "https://www.credly.com/"
   },
   {
     title: "Oracle Cloud Infrastructure AI Foundations Associate",
@@ -212,7 +212,7 @@ export const certifications = [
     date: "Jul 2026",
     credentialId: "Oracle-OCI-AI-2026",
     tags: ["Cloud AI", "Oracle Cloud", "Machine Learning"],
-    link: "https://linkedin.com/in/liza-rawat-912975352/details/certifications/"
+    link: "https://mylearn.oracle.com/"
   },
   {
     title: "Oracle Data Platform 2025 Certified Foundations Associate",
@@ -220,7 +220,7 @@ export const certifications = [
     date: "May 2026",
     credentialId: "Oracle-Data-2025",
     tags: ["Data Engineering", "SQL", "Enterprise Data"],
-    link: "https://linkedin.com/in/liza-rawat-912975352/details/certifications/"
+    link: "https://mylearn.oracle.com/"
   },
   {
     title: "Complete Data Science, ML, DL & NLP Bootcamp (99 Hours)",
@@ -228,7 +228,7 @@ export const certifications = [
     date: "May 2026",
     credentialId: "UC-DataScience-99H",
     tags: ["Machine Learning", "Deep Learning", "NLP", "Python"],
-    link: "https://linkedin.com/in/liza-rawat-912975352/details/certifications/"
+    link: "https://www.udemy.com/"
   },
   {
     title: "GEN AI NASSCOM - SFJ Skill Development Program",
@@ -236,7 +236,7 @@ export const certifications = [
     date: "Feb 2026",
     credentialId: "NASSCOM-GENAI-2026",
     tags: ["Generative AI", "LLMs", "AI Applications"],
-    link: "https://linkedin.com/in/liza-rawat-912975352/details/certifications/"
+    link: "https://futureskillsprime.in/"
   },
   {
     title: "Artificial Intelligence Foundations: Machine Learning",
@@ -244,7 +244,7 @@ export const certifications = [
     date: "Jul 2025",
     credentialId: "LIL-AI-ML-2025",
     tags: ["AI Fundamentals", "ML Concepts"],
-    link: "https://linkedin.com/in/liza-rawat-912975352/details/certifications/"
+    link: "https://www.linkedin.com/learning/"
   },
   {
     title: "Career Skills in Data Analytics",
@@ -252,7 +252,7 @@ export const certifications = [
     date: "2025",
     credentialId: "LIL-DataAnalytics-2025",
     tags: ["Analytics", "Business Intelligence"],
-    link: "https://linkedin.com/in/liza-rawat-912975352/details/certifications/"
+    link: "https://www.linkedin.com/learning/"
   },
   {
     title: "HackerRank Certified: Python & C#",
@@ -260,7 +260,7 @@ export const certifications = [
     date: "2024 - 2025",
     credentialId: "HackerRank-Python-CSharp",
     tags: ["Python", "C#", "Algorithms"],
-    link: "https://linkedin.com/in/liza-rawat-912975352/details/certifications/"
+    link: "https://www.hackerrank.com/certificates/"
   }
 ];
 
