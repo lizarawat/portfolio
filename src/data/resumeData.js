@@ -263,6 +263,14 @@ export const certifications = [
     link: "https://www.linkedin.com/learning/certificates/9065a8a04872e04f7086ad92c2c97f47921d7f2cc9bbbde05557f5556e6edd11"
   },
   {
+    title: "What Is Generative AI?",
+    issuer: "LinkedIn Learning",
+    date: "Jul 2025",
+    credentialId: "LIL-GenAI-2025",
+    tags: ["Generative AI", "LLMs", "AI Trends"],
+    link: null
+  },
+  {
     title: "C Programming (72 Hours)",
     issuer: "iamNeo",
     date: "May 2025",
@@ -277,6 +285,22 @@ export const certifications = [
     credentialId: "Skillera-AIML-2025",
     tags: ["Machine Learning", "AI Fundamentals"],
     link: "https://www.linkedin.com/posts/liza-rawat-912975352_ai-machinelearning-lifelonglearning-activity-7312874682704166912-Ye6f?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFgQad4BnTBSquJP2h3zX-XUDmABldjx9NA"
+  },
+  {
+    title: "Introduction to AI/ML",
+    issuer: "Coursera",
+    date: "2025",
+    credentialId: "Coursera-AIML-2025",
+    tags: ["AI", "Machine Learning"],
+    link: null
+  },
+  {
+    title: "Career Skills in Data Analytics",
+    issuer: "LinkedIn Learning",
+    date: "2025",
+    credentialId: "LIL-DataAnalytics-2025",
+    tags: ["Analytics", "Business Intelligence"],
+    link: null
   },
   {
     title: "Basic to Beyond: Python (18 Hours)",
