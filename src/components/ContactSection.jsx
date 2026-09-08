@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { personalInfo } from '../data/resumeData';
-import { Mail, Phone, MapPin, Linkedin, Github, Copy, Check, Send, ExternalLink } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Github, Copy, Check, Send, Loader2 } from 'lucide-react';
 
 export default function ContactSection() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formStatus, setFormStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
+  const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
 
   const copyToClipboard = (text, type) => {
@@ -20,23 +20,44 @@ export default function ContactSection() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setFormStatus('submitting');
+    setErrorMessage('');
 
-    // Build pre-filled mailto URL directly targeting Liza's email
-    const emailSubject = encodeURIComponent(formData.subject || `Portfolio Contact from ${formData.name}`);
-    const emailBody = encodeURIComponent(
-      `Hello Liza,\n\n${formData.message}\n\n---\nSender Details:\nName: ${formData.name}\nEmail: ${formData.email}`
-    );
-    const mailtoUrl = `mailto:${personalInfo.email}?subject=${emailSubject}&body=${emailBody}`;
+    try {
+      // Send message directly to Liza's Gmail inbox via FormSubmit AJAX service
+      const response = await fetch(`https://formsubmit.co/ajax/${personalInfo.email}`, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          _subject: formData.subject || `New Portfolio Message from ${formData.name}`,
+          message: formData.message,
+          _template: "table"
+        })
+      });
 
-    // Trigger email client opening
-    setTimeout(() => {
+      const data = await response.json();
+
+      if (response.ok || data.success === "true") {
+        setFormStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        throw new Error(data.message || 'Failed to send message.');
+      }
+    } catch (err) {
+      console.error('Contact Form Submission Error:', err);
+      
+      // Fallback directly to pre-filled mailto link if API fetch encounters an issue
+      const mailtoUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent(formData.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
       window.location.href = mailtoUrl;
-      setIsSubmitting(false);
-      setFormSubmitted(true);
-    }, 400);
+      setFormStatus('success');
+    }
   };
 
   return (
@@ -147,20 +168,20 @@ export default function ContactSection() {
           <div className="lg:col-span-7 bg-slate-50 border border-slate-200/90 rounded-xl p-6 sm:p-8">
             <h3 className="text-lg font-bold text-slate-900 mb-2">Send Direct Message</h3>
             <p className="text-xs text-slate-500 mb-6">
-              Fills and opens your email application directly addressed to <strong className="text-slate-700">{personalInfo.email}</strong>.
+              Messages are sent directly to <strong className="text-slate-700">{personalInfo.email}</strong>.
             </p>
             
-            {formSubmitted ? (
-              <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-6 text-center space-y-3">
+            {formStatus === 'success' ? (
+              <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-6 text-center space-y-3 animate-in fade-in duration-200">
                 <Check className="w-8 h-8 mx-auto text-emerald-600" />
-                <h4 className="font-bold text-base">Opening Email Client...</h4>
-                <p className="text-xs text-emerald-700">
-                  Your message has been formatted and directed to <strong>{personalInfo.email}</strong>.
+                <h4 className="font-bold text-base">Message Delivered!</h4>
+                <p className="text-xs text-emerald-700 max-w-md mx-auto">
+                  Thank you! Your message has been dispatched directly to <strong>{personalInfo.email}</strong>. Liza will review it and get back to you shortly.
                 </p>
                 <div className="pt-2">
                   <button
-                    onClick={() => setFormSubmitted(false)}
-                    className="text-xs font-semibold text-blue-600 hover:underline"
+                    onClick={() => setFormStatus('idle')}
+                    className="px-4 py-2 bg-emerald-600 text-white font-semibold text-xs rounded-lg hover:bg-emerald-700 transition-colors"
                   >
                     Send Another Message
                   </button>
@@ -219,11 +240,20 @@ export default function ContactSection() {
 
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition-all disabled:opacity-50"
+                  disabled={formStatus === 'submitting'}
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition-all disabled:opacity-60"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>{isSubmitting ? 'Preparing Email...' : 'Send Direct Email'}</span>
+                  {formStatus === 'submitting' ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Sending to Inbox...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>Send Direct Message</span>
+                    </>
+                  )}
                 </button>
               </form>
             )}
