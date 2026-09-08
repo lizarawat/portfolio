@@ -50,13 +50,13 @@ export default function Projects() {
         </div>
 
         {/* Projects Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="bg-white border border-slate-200/90 rounded-xl p-6 shadow-xs card-subtle flex flex-col justify-between"
+              className="bg-white border border-slate-200/90 rounded-xl p-6 shadow-xs card-subtle flex flex-col justify-between h-full"
             >
-              <div>
+              <div className="flex flex-col flex-1">
                 {/* Category & Date */}
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-100">
@@ -67,47 +67,59 @@ export default function Projects() {
                   </span>
                 </div>
 
-                {/* Title */}
-                <h3 className="text-lg font-bold text-slate-900 leading-snug hover:text-blue-600 transition-colors cursor-pointer"
-                    onClick={() => setSelectedProject(project)}>
-                  {project.title}
-                </h3>
+                {/* Title Container - Aligned Min Height */}
+                <div className="min-h-[3.5rem] flex flex-col justify-center">
+                  <h3
+                    className="text-base sm:text-lg font-bold text-slate-900 leading-snug hover:text-blue-600 transition-colors cursor-pointer line-clamp-2"
+                    onClick={() => setSelectedProject(project)}
+                  >
+                    {project.title}
+                  </h3>
+                </div>
 
-                {/* Short Description */}
-                <p className="mt-3 text-sm text-slate-600 leading-relaxed font-normal">
-                  {project.shortDesc}
-                </p>
+                {/* Short Description Container - Aligned Min Height */}
+                <div className="mt-2 min-h-[3.25rem] flex flex-col justify-start">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal line-clamp-2">
+                    {project.shortDesc}
+                  </p>
+                </div>
 
-                {/* Metric Badge Callout */}
-                {project.metrics && project.metrics[0] && (
-                  <div className="mt-4 p-3 bg-slate-50 border border-slate-100 rounded-lg flex items-center justify-between">
-                    <span className="text-xs text-slate-500 font-medium">{project.metrics[0].label}</span>
-                    <span className="text-xs font-extrabold text-slate-900 bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded border border-emerald-200/60">
-                      {project.metrics[0].val}
-                    </span>
-                  </div>
-                )}
-
-                {/* Tech Stack Badges */}
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {project.techStack.slice(0, 4).map((tech, idx) => (
-                    <span
-                      key={idx}
-                      className="px-2 py-0.5 text-[11px] font-semibold text-slate-600 bg-slate-100 rounded"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.techStack.length > 4 && (
-                    <span className="px-2 py-0.5 text-[11px] font-semibold text-slate-400 bg-slate-50 rounded">
-                      +{project.techStack.length - 4} more
-                    </span>
+                {/* Metric Badge Callout - Aligned Vertical Position */}
+                <div className="mt-4 min-h-[2.75rem] flex items-center">
+                  {project.metrics && project.metrics[0] ? (
+                    <div className="w-full p-2.5 bg-slate-50 border border-slate-100 rounded-lg flex items-center justify-between">
+                      <span className="text-xs text-slate-500 font-medium truncate pr-2">{project.metrics[0].label}</span>
+                      <span className="text-xs font-extrabold text-slate-900 bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded border border-emerald-200/60 whitespace-nowrap">
+                        {project.metrics[0].val}
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="w-full h-full bg-transparent" />
                   )}
+                </div>
+
+                {/* Tech Stack Badges - Aligned Vertical Position */}
+                <div className="mt-4 min-h-[2.5rem] flex items-center">
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.techStack.slice(0, 4).map((tech, idx) => (
+                      <span
+                        key={idx}
+                        className="px-2 py-0.5 text-[11px] font-semibold text-slate-600 bg-slate-100 rounded"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.techStack.length > 4 && (
+                      <span className="px-2 py-0.5 text-[11px] font-semibold text-slate-400 bg-slate-50 rounded">
+                        +{project.techStack.length - 4} more
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+              {/* Action Buttons Bar - Fixed at Bottom */}
+              <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
                 <button
                   onClick={() => setSelectedProject(project)}
                   className="text-xs font-bold text-blue-600 hover:text-blue-800 inline-flex items-center gap-1"
