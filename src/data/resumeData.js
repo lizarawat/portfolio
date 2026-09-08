@@ -7,7 +7,7 @@ export const personalInfo = {
   phone: "+91-7678628143",
   linkedin: "https://linkedin.com/in/liza-rawat-912975352/",
   github: "https://github.com/lizarawat",
-  resumeUrl: "#contact", // or link to PDF
+  resumeUrl: "#contact",
   objective: "To start my career in Data Engineering and Artificial Intelligence, where I can apply my technical skills to real-world problems, build scalable solutions, and continuously grow as an engineer."
 };
 
@@ -68,34 +68,12 @@ export const skillCategories = [
 
 export const projects = [
   {
-    id: "quant-analytics",
-    title: "Real-Time Quantitative Equity Analytics Platform",
-    date: "Jun 2026",
-    category: "Quant & Full Stack",
-    shortDesc: "Real-time algorithmic trading analytics engine tracking 20+ NSE bluechip equities with intraday sentiment scoring.",
-    fullDesc: "Architected a high-throughput quantitative platform that streams intraday OHLC prices for 20+ NSE bluechip equities, calculating RSI/MACD signals via pandas-ta and incorporating NLP market sentiment scoring using FinBERT.",
-    metrics: [
-      { label: "Equity Coverage", val: "20+ NSE Bluechips" },
-      { label: "Margin Simulated", val: "₹10 Lakhs+" },
-      { label: "Streaming Latency", val: "<200ms" },
-      { label: "Portfolio Yield", val: "+37.29% P&L" }
-    ],
-    highlights: [
-      "Streamed live ticker data via WebSockets and Yahoo Finance API with sub-200ms response time.",
-      "Engineered automated trade signal generation combining quantitative TA-Lib indicators with FinBERT market sentiment.",
-      "Built interactive React.js dashboard for real-time equity tracking and portfolio P&L visualization."
-    ],
-    techStack: ["Python", "Pandas", "TA-Lib", "FinBERT (NLP)", "React.js", "WebSockets", "Yahoo Finance API"],
-    github: "https://github.com/lizarawat",
-    demo: "#"
-  },
-  {
     id: "debatemind-nlp",
-    title: "AI Argument Scoring & NLP Evaluation Engine (DebateMind)",
+    title: "DebateMind - AI Argument Scoring & NLP Evaluation Engine",
     date: "Apr 2026",
     category: "AI / ML & Web Platform",
     shortDesc: "Serverless AI debate platform scoring argument logic (0-100) using Gemini 2.5 Flash and Toulmin NLP structure.",
-    fullDesc: "Engineered an AI evaluation platform that analyzes user debate structure across 12+ topics, utilizing serverless API proxies with Gemini 2.5 Flash tool-calling outputs and a custom Toulmin model for argument scoring.",
+    fullDesc: "Engineered an AI-powered web platform enabling multilingual debates, quizzes, and Toulmin argument building with AI, human, or random opponents across 12+ debate topics with automated scoring.",
     metrics: [
       { label: "Debate Topics", val: "12+ Live Topics" },
       { label: "Competitive Tiers", val: "8 Rank Tiers" },
@@ -108,30 +86,28 @@ export const projects = [
       "Built interactive frontend with Tailwind CSS, supporting 5 battle modes and 8 competitive user tiers."
     ],
     techStack: ["Gemini 2.5 Flash", "React.js", "TypeScript", "PostgreSQL", "Structured Outputs", "Tailwind CSS", "Wasm"],
-    github: "https://github.com/lizarawat",
-    demo: "#"
+    github: "https://github.com/lizarawat/DebateMind",
+    demo: "https://github.com/lizarawat/DebateMind"
   },
   {
-    id: "demographic-eda",
-    title: "Demographic EDA & National Census Analytics Dashboard",
-    date: "Apr 2026",
-    category: "Data Analytics & Engineering",
-    shortDesc: "Large-scale exploratory data analysis analyzing 1.21B+ population records across 35 states and 1,344 districts.",
-    fullDesc: "Comprehensive data engineering project extracting socio-economic trends, literacy disparities, and workforce distribution patterns from 1.21 Billion+ national census data points.",
+    id: "tradecraft",
+    title: "TradeCraft - Paper Trading & Stock Practice Platform",
+    date: "2025",
+    category: "Quant & Full Stack",
+    shortDesc: "Beginner-friendly paper trading application to practice stock trading in a risk-free environment with secure 2-step auth.",
+    fullDesc: "Interactive web application allowing users to learn paper stock trading, manage virtual portfolios, execute simulated market trades, and track performance with real-time feedback.",
     metrics: [
-      { label: "Records Analyzed", val: "1.21 Billion+" },
-      { label: "Geographic Scope", val: "35 States & 1,344 Districts" },
-      { label: "Key National Metric", val: "67.8% Avg Literacy Rate" },
-      { label: "Interactivity", val: "Dynamic Top-N Metric Filter" }
+      { label: "Trading Mode", val: "Risk-Free Paper Trading" },
+      { label: "Authentication", val: "Secure Two-Step Authorization" },
+      { label: "UI / UX", val: "Interactive Portfolio Dashboard" }
     ],
     highlights: [
-      "Optimized Pandas data processing pipeline to handle over 1.21 Billion records cleanly.",
-      "Quantified socio-economic correlations using Seaborn heatmaps and statistical distribution models.",
-      "Deployed interactive analytical web dashboard using Streamlit and Plotly for multi-dimensional demographic exploration."
+      "Designed clean beginner-friendly trading interface for seamless order placement and portfolio monitoring.",
+      "Implemented secure authorization flow and virtual account ledger for risk-free market learning."
     ],
-    techStack: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Streamlit", "Plotly"],
-    github: "https://github.com/lizarawat",
-    demo: "#"
+    techStack: ["React.js", "JavaScript", "HTML5", "CSS3", "WebSockets"],
+    github: "https://github.com/lizarawat/TradeCraft",
+    demo: "https://github.com/lizarawat/TradeCraft"
   },
   {
     id: "netroutex-simulator",
@@ -152,8 +128,52 @@ export const projects = [
       "Supports dynamic topology modification, node addition, and live link failure scenario testing."
     ],
     techStack: ["React.js", "TypeScript", "C++", "WebAssembly", "JSON"],
-    github: "https://github.com/lizarawat",
-    demo: "#"
+    github: "https://github.com/lizarawat/NetRoutex",
+    demo: "https://github.com/lizarawat/NetRoutex"
+  },
+  {
+    id: "quant-analytics",
+    title: "Real-Time Quantitative Equity Analytics Platform",
+    date: "Jun 2026",
+    category: "Quant & Full Stack",
+    shortDesc: "Real-time algorithmic trading analytics engine tracking 20+ NSE bluechip equities with intraday sentiment scoring.",
+    fullDesc: "Architected a high-throughput quantitative platform that streams intraday OHLC prices for 20+ NSE bluechip equities, calculating RSI/MACD signals via pandas-ta and incorporating NLP market sentiment scoring using FinBERT.",
+    metrics: [
+      { label: "Equity Coverage", val: "20+ NSE Bluechips" },
+      { label: "Margin Simulated", val: "₹10 Lakhs+" },
+      { label: "Streaming Latency", val: "<200ms" },
+      { label: "Portfolio Yield", val: "+37.29% P&L" }
+    ],
+    highlights: [
+      "Streamed live ticker data via WebSockets and Yahoo Finance API with sub-200ms response time.",
+      "Engineered automated trade signal generation combining quantitative TA-Lib indicators with FinBERT market sentiment.",
+      "Built interactive React.js dashboard for real-time equity tracking and portfolio P&L visualization."
+    ],
+    techStack: ["Python", "Pandas", "TA-Lib", "FinBERT (NLP)", "React.js", "WebSockets", "Yahoo Finance API"],
+    github: "https://github.com/lizarawat/Real-Time-Quantitative-Equity-Analytics-Platform",
+    demo: "https://github.com/lizarawat/Real-Time-Quantitative-Equity-Analytics-Platform"
+  },
+  {
+    id: "demographic-eda",
+    title: "Demographic EDA & National Census Analytics Dashboard",
+    date: "Apr 2026",
+    category: "Data Analytics & Engineering",
+    shortDesc: "Large-scale exploratory data analysis analyzing 1.21B+ population records across 35 states and 1,344 districts.",
+    fullDesc: "Comprehensive data engineering project extracting socio-economic trends, literacy disparities, and workforce distribution patterns from 1.21 Billion+ national census data points.",
+    metrics: [
+      { label: "Records Analyzed", val: "1.21 Billion+" },
+      { label: "Geographic Scope", val: "35 States & 1,344 Districts" },
+      { label: "Key National Metric", val: "67.8% Avg Literacy Rate" },
+      { label: "Interactivity", val: "Dynamic Top-N Metric Filter" }
+    ],
+    highlights: [
+      "Optimized Pandas data processing pipeline to handle over 1.21 Billion records cleanly.",
+      "Quantified socio-economic correlations using Seaborn heatmaps and statistical distribution models.",
+      "Deployed interactive analytical web dashboard using Streamlit and Plotly for multi-dimensional demographic exploration."
+    ],
+    techStack: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Streamlit", "Plotly"],
+    github: "https://github.com/lizarawat/Indian-Census-2011-EDA",
+    demo: "https://github.com/lizarawat/Indian-Census-2011-EDA"
   },
   {
     id: "deadlockx",
@@ -172,8 +192,8 @@ export const projects = [
       "Visualized process-resource dependencies with actionable deadlock resolution recommendations."
     ],
     techStack: ["C++", "OS Algorithms", "Resource Allocation Graphs", "Cycle Detection"],
-    github: "https://github.com/lizarawat",
-    demo: "#"
+    github: "https://github.com/lizarawat/DeadlockX",
+    demo: "https://github.com/lizarawat/DeadlockX"
   },
   {
     id: "physics-engine",
@@ -192,8 +212,8 @@ export const projects = [
       "Calculated exact contact manifolds using SAT for concave and convex 2D bodies."
     ],
     techStack: ["C#", "Unity Engine", "VS Code", "Physics Math"],
-    github: "https://github.com/lizarawat",
-    demo: "#"
+    github: "https://github.com/lizarawat/Custom-2D-Physics-Engine",
+    demo: "https://github.com/lizarawat/Custom-2D-Physics-Engine"
   }
 ];
 
