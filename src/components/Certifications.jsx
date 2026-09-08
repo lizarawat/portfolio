@@ -1,6 +1,6 @@
 import React from 'react';
 import { certifications } from '../data/resumeData';
-import { Award, CheckCircle, ExternalLink, ShieldCheck } from 'lucide-react';
+import { ShieldCheck, ExternalLink, CheckCircle } from 'lucide-react';
 
 export default function Certifications() {
   return (
@@ -23,11 +23,11 @@ export default function Certifications() {
         </div>
 
         {/* Certifications Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
           {certifications.map((cert, idx) => (
             <div
               key={idx}
-              className="bg-slate-50/80 border border-slate-200/90 rounded-xl p-5 card-subtle flex flex-col justify-between"
+              className="bg-slate-50/80 border border-slate-200/90 rounded-xl p-5 card-subtle flex flex-col justify-between h-full"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
@@ -57,9 +57,22 @@ export default function Certifications() {
 
               <div className="mt-5 pt-3 border-t border-slate-200/60 flex items-center justify-between text-xs text-slate-400 font-mono">
                 <span>ID: {cert.credentialId}</span>
-                <span className="text-emerald-700 font-sans font-semibold flex items-center gap-1">
-                  <CheckCircle className="w-3 h-3" /> Verified
-                </span>
+                {cert.link ? (
+                  <a
+                    href={cert.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 font-sans font-semibold text-blue-600 hover:text-blue-800 hover:underline"
+                    title="Verify Certificate Credential"
+                  >
+                    <span>Verify</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                ) : (
+                  <span className="text-emerald-700 font-sans font-semibold flex items-center gap-1">
+                    <CheckCircle className="w-3 h-3" /> Verified
+                  </span>
+                )}
               </div>
             </div>
           ))}
