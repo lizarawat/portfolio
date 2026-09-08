@@ -69,7 +69,7 @@ export const skillCategories = [
 export const projects = [
   {
     id: "debatemind-nlp",
-    title: "DebateMind - AI Argument Scoring & NLP Evaluation Engine",
+    title: "DebateMind — AI Argument Scoring & NLP Evaluation Engine",
     date: "Apr 2026",
     category: "AI / ML & Web Platform",
     shortDesc: "Serverless AI debate platform scoring argument logic (0-100) using Gemini 2.5 Flash and Toulmin NLP structure.",
@@ -87,31 +87,33 @@ export const projects = [
     ],
     techStack: ["Gemini 2.5 Flash", "React.js", "TypeScript", "PostgreSQL", "Structured Outputs", "Tailwind CSS", "Wasm"],
     github: "https://github.com/lizarawat/DebateMind",
-    demo: "https://github.com/lizarawat/DebateMind"
+    demo: "https://debatemind.lovable.app/"
   },
   {
-    id: "tradecraft",
-    title: "TradeCraft - Paper Trading & Stock Practice Platform",
-    date: "2025",
+    id: "tradecraft-quant",
+    title: "TradeCraft — Real-Time Quantitative Equity Analytics & Paper Trading Platform",
+    date: "Jun 2026",
     category: "Quant & Full Stack",
-    shortDesc: "Beginner-friendly paper trading application to practice stock trading in a risk-free environment with secure 2-step auth.",
-    fullDesc: "Interactive web application allowing users to learn paper stock trading, manage virtual portfolios, execute simulated market trades, and track performance with real-time feedback.",
+    shortDesc: "Real-time algorithmic trading & quantitative analytics platform tracking 20+ NSE bluechip equities with intraday FinBERT sentiment scoring and risk-free paper trading.",
+    fullDesc: "Architected a high-throughput quantitative paper trading platform streaming intraday OHLC prices for 20+ NSE bluechip equities. Formulated pandas-ta feature engineering scripts for RSI/MACD signals, integrated a FinBERT NLP model for market news sentiment scoring, and built a secure paper trading environment with 2-step authorization.",
     metrics: [
-      { label: "Trading Mode", val: "Risk-Free Paper Trading" },
-      { label: "Authentication", val: "Secure Two-Step Authorization" },
-      { label: "UI / UX", val: "Interactive Portfolio Dashboard" }
+      { label: "Equity Coverage", val: "20+ NSE Bluechips" },
+      { label: "Margin Simulated", val: "₹10 Lakhs+" },
+      { label: "Streaming Latency", val: "<200ms" },
+      { label: "Portfolio Yield", val: "+37.29% P&L" }
     ],
     highlights: [
-      "Designed clean beginner-friendly trading interface for seamless order placement and portfolio monitoring.",
-      "Implemented secure authorization flow and virtual account ledger for risk-free market learning."
+      "Streamed live ticker data via WebSockets and Yahoo Finance API with sub-200ms latency.",
+      "Engineered automated trade signal generation combining quantitative TA-Lib indicators with FinBERT market news sentiment.",
+      "Built beginner-friendly paper trading dashboard with virtual account ledger and secure 2-step authorization."
     ],
-    techStack: ["React.js", "JavaScript", "HTML5", "CSS3", "WebSockets"],
+    techStack: ["Python", "Pandas", "TA-Lib", "FinBERT (NLP)", "React.js", "WebSockets", "Yahoo Finance API"],
     github: "https://github.com/lizarawat/TradeCraft",
-    demo: "https://github.com/lizarawat/TradeCraft"
+    demo: "https://tradecraft-rho-seven.vercel.app/"
   },
   {
     id: "netroutex-simulator",
-    title: "NetRoutex - Network Routing & Algorithm Simulator",
+    title: "NetRoutex — Network Routing & Algorithm Simulator",
     date: "Jun 2026",
     category: "Algorithms & WebAssembly",
     shortDesc: "Interactive graph algorithm simulator visualizing Dijkstra, Bellman-Ford, BFS, and DFS with real-time packet routing.",
@@ -129,29 +131,7 @@ export const projects = [
     ],
     techStack: ["React.js", "TypeScript", "C++", "WebAssembly", "JSON"],
     github: "https://github.com/lizarawat/NetRoutex",
-    demo: "https://github.com/lizarawat/NetRoutex"
-  },
-  {
-    id: "quant-analytics",
-    title: "Real-Time Quantitative Equity Analytics Platform",
-    date: "Jun 2026",
-    category: "Quant & Full Stack",
-    shortDesc: "Real-time algorithmic trading analytics engine tracking 20+ NSE bluechip equities with intraday sentiment scoring.",
-    fullDesc: "Architected a high-throughput quantitative platform that streams intraday OHLC prices for 20+ NSE bluechip equities, calculating RSI/MACD signals via pandas-ta and incorporating NLP market sentiment scoring using FinBERT.",
-    metrics: [
-      { label: "Equity Coverage", val: "20+ NSE Bluechips" },
-      { label: "Margin Simulated", val: "₹10 Lakhs+" },
-      { label: "Streaming Latency", val: "<200ms" },
-      { label: "Portfolio Yield", val: "+37.29% P&L" }
-    ],
-    highlights: [
-      "Streamed live ticker data via WebSockets and Yahoo Finance API with sub-200ms response time.",
-      "Engineered automated trade signal generation combining quantitative TA-Lib indicators with FinBERT market sentiment.",
-      "Built interactive React.js dashboard for real-time equity tracking and portfolio P&L visualization."
-    ],
-    techStack: ["Python", "Pandas", "TA-Lib", "FinBERT (NLP)", "React.js", "WebSockets", "Yahoo Finance API"],
-    github: "https://github.com/lizarawat/Real-Time-Quantitative-Equity-Analytics-Platform",
-    demo: "https://github.com/lizarawat/Real-Time-Quantitative-Equity-Analytics-Platform"
+    demo: "https://net-routex.vercel.app/"
   },
   {
     id: "demographic-eda",
@@ -173,11 +153,11 @@ export const projects = [
     ],
     techStack: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Streamlit", "Plotly"],
     github: "https://github.com/lizarawat/Indian-Census-2011-EDA",
-    demo: "https://github.com/lizarawat/Indian-Census-2011-EDA"
+    demo: "https://lnkd.in/p/dVp-qKZU"
   },
   {
     id: "deadlockx",
-    title: "DeadlockX - Automated Deadlock Detection Tool",
+    title: "DeadlockX — Automated Deadlock Detection Tool",
     date: "2025",
     category: "Operating Systems",
     shortDesc: "OS diagnostic tool visualizing Resource Allocation Graphs and detecting process dependency cycles.",
@@ -193,7 +173,7 @@ export const projects = [
     ],
     techStack: ["C++", "OS Algorithms", "Resource Allocation Graphs", "Cycle Detection"],
     github: "https://github.com/lizarawat/DeadlockX",
-    demo: "https://github.com/lizarawat/DeadlockX"
+    demo: "https://www.linkedin.com/posts/aman79_operatingsystems-deadlockdetection-bankersalgorithm-ugcPost-7454559054561009664-VuEo?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFHfTqwB-MGF3brlqgZi7BMoIF1bkAZfnwI"
   },
   {
     id: "physics-engine",
@@ -213,7 +193,7 @@ export const projects = [
     ],
     techStack: ["C#", "Unity Engine", "VS Code", "Physics Math"],
     github: "https://github.com/lizarawat/Custom-2D-Physics-Engine",
-    demo: "https://github.com/lizarawat/Custom-2D-Physics-Engine"
+    demo: null
   }
 ];
 

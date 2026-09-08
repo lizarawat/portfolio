@@ -4,7 +4,7 @@ import { X, ExternalLink, Github, CheckCircle2, Globe } from 'lucide-react';
 export default function ProjectModal({ project, onClose }) {
   if (!project) return null;
 
-  const demoUrl = project.demo && project.demo !== '#' ? project.demo : project.github;
+  const hasDemo = project.demo && project.demo.trim() !== '' && project.demo !== '#';
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
@@ -95,24 +95,28 @@ export default function ProjectModal({ project, onClose }) {
         {/* Modal Footer */}
         <div className="bg-slate-50 px-6 py-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <a
-              href={demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors shadow-2xs"
-            >
-              <Globe className="w-4 h-4" />
-              <span>Visit Live Site</span>
-            </a>
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-100 rounded-lg transition-colors shadow-2xs"
-            >
-              <Github className="w-4 h-4" />
-              <span>Source Code</span>
-            </a>
+            {hasDemo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors shadow-2xs"
+              >
+                <Globe className="w-4 h-4" />
+                <span>Visit Live Site</span>
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-100 rounded-lg transition-colors shadow-2xs"
+              >
+                <Github className="w-4 h-4" />
+                <span>Source Code</span>
+              </a>
+            )}
           </div>
           <button
             onClick={onClose}
