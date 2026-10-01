@@ -1,28 +1,39 @@
-import React from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Certifications from './components/Certifications';
-import EducationExperience from './components/EducationExperience';
-import ContactSection from './components/ContactSection';
-import Footer from './components/Footer';
+import { MotionConfig, useReducedMotion } from 'motion/react'
+import { ThemeContext, useThemeState } from './hooks/useTheme.js'
+import { useLenis } from './hooks/useLenis.js'
+import Nav from './components/chrome/Nav.jsx'
+import Hero from './components/hero/Hero.jsx'
+import Ticker from './components/stats/Ticker.jsx'
+import Stats from './components/stats/Stats.jsx'
+import Work from './components/work/Work.jsx'
+import TypeCase from './components/skills/TypeCase.jsx'
+import Record from './components/record/Record.jsx'
+import Credentials from './components/creds/Credentials.jsx'
+import Contact from './components/contact/Contact.jsx'
+import Footer from './components/contact/Footer.jsx'
 
 export default function App() {
+  const themeState = useThemeState()
+  const reduce = useReducedMotion()
+  useLenis(!reduce)
+
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
-      <Header />
-      <main className="flex-grow">
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Certifications />
-        <EducationExperience />
-        <ContactSection />
-      </main>
-      <Footer />
-    </div>
-  );
+    <ThemeContext.Provider value={themeState}>
+      <MotionConfig reducedMotion="user">
+        <a className="skip" href="#work">Skip to work</a>
+        <Nav />
+        <main>
+          <Hero />
+          <Ticker />
+          <Stats />
+          <Work />
+          <TypeCase />
+          <Record />
+          <Credentials />
+          <Contact />
+        </main>
+        <Footer />
+      </MotionConfig>
+    </ThemeContext.Provider>
+  )
 }

@@ -1,0 +1,475 @@
+/* Certificates: a ticket booth. Stubs on the left, a light table on the right.
+   Only blue + ink here, no pink, to keep it formal. */
+.cr {
+  padding: clamp(60px, 9vw, 130px) 0;
+}
+
+.cr__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+.cr__sum {
+  margin: 14px 0 0;
+  color: var(--ink-2);
+}
+
+/* Filter: segmented pills with a sliding ink pill behind the active one */
+.cr__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--r-pill);
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.cr__filter {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: var(--r-pill);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ink-2);
+  isolation: isolate;
+  transition: color 0.25s;
+}
+.cr__filter:hover {
+  color: var(--ink);
+}
+.cr__filter[aria-pressed='true'] {
+  color: var(--paper);
+}
+.cr__pill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: var(--r-pill);
+  background: var(--ink);
+}
+.cr__fcount {
+  display: grid;
+  place-items: center;
+  min-width: 22px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--r-pill);
+  background: color-mix(in oklab, currentColor 14%, transparent);
+  font-size: 0.7rem;
+}
+
+.cr__booth {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: clamp(24px, 3vw, 44px);
+  align-items: start;
+}
+
+.cr__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-content: start;
+}
+
+/* Ticket stub */
+.stub {
+  --bg: var(--paper-2);
+  --fg: var(--ink);
+  --notch: 8px;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 0 68px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 84px;
+  padding: 12px 0 12px 12px;
+  text-align: left;
+  color: var(--fg);
+  /* Two half-circle notches cut where the perforation runs */
+  background:
+    radial-gradient(circle at calc(100% - 68px) 0, transparent var(--notch), var(--bg) calc(var(--notch) + 0.5px)) top / 100% 51% no-repeat,
+    radial-gradient(circle at calc(100% - 68px) 100%, transparent var(--notch), var(--bg) calc(var(--notch) + 0.5px)) bottom / 100% 51% no-repeat;
+  border-radius: 10px;
+  filter: drop-shadow(0 1px 0 var(--rule));
+  transition: transform 0.35s var(--ease-out), filter 0.35s var(--ease-out), color 0.25s;
+}
+.stub:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 6px 10px rgb(20 30 60 / 0.12)) drop-shadow(0 1px 0 var(--rule));
+}
+.stub:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+.stub.is-on {
+  --bg: var(--blue);
+  --fg: var(--on-flood);
+  filter: drop-shadow(0 8px 14px rgb(0 60 110 / 0.25));
+}
+
+.stub__body {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.stub__title {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 1.25;
+}
+.stub__issuer {
+  font-size: 0.7rem;
+  color: color-mix(in oklab, var(--fg) 70%, transparent);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stub__tear {
+  align-self: stretch;
+  margin: -12px 0;
+  border-left: 2px dashed color-mix(in oklab, var(--fg) 28%, transparent);
+}
+
+.stub__side {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+.stub__date {
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+}
+.stub__status {
+  display: grid;
+  place-items: center;
+  color: color-mix(in oklab, var(--fg) 75%, transparent);
+}
+
+/* The punch: a hole appears in the stub when selected */
+.stub__punch {
+  position: absolute;
+  top: -10px;
+  right: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.35);
+  transform: scale(0);
+  transition: transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.stub.is-on .stub__punch {
+  transform: scale(1);
+}
+
+/* Issuer stamp */
+.stamp {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  color: var(--blue-text);
+  border: 1.5px solid currentColor;
+  box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 4px currentColor;
+  background: var(--paper);
+  transform: rotate(var(--tilt));
+  flex: none;
+}
+.stub.is-on .stamp {
+  color: var(--blue);
+}
+.stamp__logo {
+  width: 46%;
+  height: 46%;
+}
+.stamp__mono {
+  font-weight: 800;
+  font-stretch: 78%;
+  font-size: calc(var(--s) * 0.4);
+  line-height: 1;
+}
+.stamp__mono.is-long {
+  font-size: calc(var(--s) * 0.28);
+}
+
+/* Light table */
+.cr__viewer {
+  position: sticky;
+  top: 92px;
+}
+
+.lt {
+  display: grid;
+  border-radius: var(--r);
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  overflow: hidden;
+}
+
+.lt__table {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  padding: clamp(22px, 4vw, 44px);
+  /* A lit surface with a faint printer's grid */
+  background:
+    radial-gradient(ellipse at 50% 40%, color-mix(in oklab, #fff 60%, transparent), transparent 70%),
+    linear-gradient(var(--rule) 1px, transparent 1px) 0 0 / 28px 28px,
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px) 0 0 / 28px 28px,
+    var(--paper-3);
+  overflow: hidden;
+}
+:root[data-theme='dark'] .lt__table {
+  background:
+    radial-gradient(ellipse at 50% 40%, rgb(255 255 255 / 0.08), transparent 70%),
+    linear-gradient(var(--rule) 1px, transparent 1px) 0 0 / 28px 28px,
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px) 0 0 / 28px 28px,
+    var(--paper-3);
+}
+
+.lt__sheet {
+  position: relative;
+  width: 100%;
+  max-height: 100%;
+  display: grid;
+}
+
+.lt__tape {
+  position: absolute;
+  top: -12px;
+  z-index: 2;
+  width: 64px;
+  height: 22px;
+  background: color-mix(in oklab, var(--blue) 22%, rgb(255 255 255 / 0.55));
+  backdrop-filter: blur(1px);
+}
+.lt__tape--l {
+  left: 14%;
+  transform: rotate(-7deg);
+}
+.lt__tape--r {
+  right: 14%;
+  transform: rotate(6deg);
+}
+
+.lt__print {
+  position: relative;
+  display: block;
+  padding: 8px;
+  background: #fff;
+  box-shadow: 0 18px 40px -18px rgb(10 20 40 / 0.45), 0 1px 0 rgb(0 0 0 / 0.06);
+  cursor: zoom-in;
+}
+.lt__print img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+}
+.lt__zoom {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: var(--r-pill);
+  background: #1c1c21;
+  color: #efefe9;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s, transform 0.3s var(--ease-out);
+}
+.lt__print:hover .lt__zoom,
+.lt__print:focus-visible .lt__zoom {
+  opacity: 1;
+  transform: none;
+}
+
+.lt__blank {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 30px 24px;
+  text-align: center;
+  background: var(--paper);
+  border: 1.5px dashed var(--ink-3);
+  border-radius: 8px;
+}
+.lt__blank-title {
+  margin: 8px 0 0;
+  font-weight: 800;
+  font-stretch: 80%;
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+.lt__blank-text {
+  margin: 0;
+  max-width: 30ch;
+  color: var(--ink-2);
+  font-size: 0.92rem;
+}
+
+.lt__info {
+  display: grid;
+  gap: 14px;
+  padding: 18px 20px 20px;
+}
+.lt__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.lt__title {
+  margin: 0;
+  font-weight: 800;
+  font-stretch: 82%;
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+.lt__meta {
+  margin: 4px 0 0;
+  color: var(--ink-2);
+}
+.lt__steps {
+  display: flex;
+  gap: 6px;
+  flex: none;
+}
+.lt__steps button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.lt__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+.lt__verify:hover {
+  box-shadow: 4px 4px 0 0 var(--blue);
+}
+.lt__host,
+.lt__nolink {
+  color: var(--ink-3);
+}
+
+/* Mobile: preview opens inline under the tapped ticket */
+.cr__inline {
+  grid-column: 1 / -1;
+  overflow: hidden;
+}
+.lt--compact {
+  margin: 2px 0 8px;
+}
+.lt--compact .lt__table {
+  aspect-ratio: auto;
+  min-height: 220px;
+  padding: 26px 18px 20px;
+}
+.lt--compact .lt__title {
+  font-size: 1.15rem;
+}
+
+/* Lightbox */
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: grid;
+  place-items: center;
+  padding: clamp(12px, 4vw, 48px);
+  background: color-mix(in oklab, #0d0d10 78%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.lb__fig {
+  display: grid;
+  gap: 0;
+  width: min(1100px, 100%);
+  max-height: 100%;
+  margin: 0;
+  border-radius: var(--r);
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.6);
+}
+.lb__fig img {
+  width: 100%;
+  max-height: calc(100dvh - 180px);
+  object-fit: contain;
+  background: #fff;
+}
+.lb__fig figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  padding: 14px 16px 14px 20px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.lb__fig figcaption > span:first-child {
+  display: grid;
+  gap: 2px;
+}
+.lb__fig figcaption .mono {
+  color: var(--ink-3);
+}
+.lb__tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 1100px) {
+  .cr__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 900px) {
+  .cr__booth {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cr__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .cr__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cr__filters {
+    width: 100%;
+    border-radius: 16px;
+  }
+  .cr__filter {
+    flex: 1 1 auto;
+    justify-content: center;
+    padding: 0 10px;
+  }
+}

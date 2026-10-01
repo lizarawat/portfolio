@@ -1,0 +1,114 @@
+.rt {
+  width: 100%;
+  height: auto;
+  padding: 8px 6px 0;
+  font-family: var(--f-mono);
+  user-select: none;
+}
+
+.rt__line {
+  stroke: var(--ink-3);
+  stroke-width: 1.5;
+  transition: stroke 0.3s;
+}
+.rt__edge.is-cut .rt__line {
+  stroke: var(--pink);
+  stroke-dasharray: 5 6;
+}
+.rt__hit {
+  stroke: transparent;
+  stroke-width: 18;
+  cursor: pointer;
+}
+.rt__edge:hover .rt__line {
+  stroke: var(--ink);
+}
+.rt__hit:focus,
+.rt__node:focus {
+  outline: none;
+}
+.rt__hit:focus-visible {
+  stroke: color-mix(in oklab, var(--blue) 30%, transparent);
+}
+
+.rt__w rect {
+  fill: var(--paper-2);
+  stroke: var(--rule);
+}
+.rt__w text {
+  fill: var(--ink-2);
+  font-size: 11px;
+  text-anchor: middle;
+  pointer-events: none;
+}
+.rt__w {
+  pointer-events: none;
+}
+.rt__w.is-cut text {
+  fill: var(--pink-text);
+  font-weight: 600;
+}
+
+.rt__path {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  mix-blend-mode: var(--blend);
+  pointer-events: none;
+}
+
+.rt__node {
+  cursor: pointer;
+}
+.rt__node:focus-visible .rt__disc {
+  stroke: var(--blue);
+  stroke-width: 3;
+}
+.rt__settled {
+  fill: color-mix(in oklab, var(--pink) 55%, transparent);
+  mix-blend-mode: var(--blend);
+}
+.rt__disc {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  transition: fill 0.3s;
+}
+.rt__node:hover .rt__disc {
+  fill: var(--paper-3);
+}
+.rt__node.is-src .rt__disc,
+.rt__node.is-dst .rt__disc {
+  fill: var(--ink);
+}
+.rt__id {
+  fill: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  text-anchor: middle;
+  pointer-events: none;
+}
+.rt__node.is-src .rt__id,
+.rt__node.is-dst .rt__id {
+  fill: var(--paper);
+}
+
+.rt__packet {
+  fill: var(--ink);
+  stroke: var(--paper);
+  stroke-width: 2.5;
+  pointer-events: none;
+}
+
+.rt__hint {
+  margin: 0;
+  padding: 0 16px 12px;
+  color: var(--ink-3);
+}
+
+.rt__down {
+  color: var(--pink-text);
+  font-weight: 500;
+}

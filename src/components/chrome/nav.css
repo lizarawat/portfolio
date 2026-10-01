@@ -1,0 +1,174 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  transition: background-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+
+.nav.is-raised {
+  background: color-mix(in oklab, var(--paper) 86%, transparent);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  box-shadow: 0 1px 0 var(--rule);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 68px;
+}
+
+.nav__mark {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Registration target, the mark printers use to line up passes. */
+.nav__reg {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  transition: transform 0.6s var(--ease-out);
+}
+.nav__reg::before,
+.nav__reg::after {
+  content: '';
+  position: absolute;
+  background: var(--ink);
+}
+.nav__reg::before {
+  left: 50%;
+  top: -5px;
+  bottom: -5px;
+  width: 1.5px;
+  transform: translateX(-50%);
+}
+.nav__reg::after {
+  top: 50%;
+  left: -5px;
+  right: -5px;
+  height: 1.5px;
+  transform: translateY(-50%);
+}
+.nav__mark:hover .nav__reg {
+  transform: rotate(90deg);
+}
+
+.nav__mono {
+  display: grid;
+  font-weight: 800;
+  font-stretch: 80%;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+.nav__mono > span {
+  grid-area: 1 / 1;
+  transition: transform 0.4s var(--ease-out);
+}
+.nav__mono-b {
+  color: var(--blue);
+}
+.nav__mono-p {
+  color: var(--pink);
+  mix-blend-mode: var(--blend);
+  transform: translate(2px, -1px);
+}
+.nav__mark:hover .nav__mono-p {
+  transform: translate(5px, -3px);
+}
+
+.nav__links {
+  display: flex;
+  gap: 4px;
+}
+
+.nav__link {
+  position: relative;
+  padding: 8px 14px;
+  border-radius: var(--r-pill);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  transition: color 0.25s, background-color 0.25s;
+}
+.nav__link:hover {
+  color: var(--ink);
+  background: var(--paper-2);
+}
+
+.nav__tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav__icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--rule);
+  transition: background-color 0.25s, transform 0.2s;
+}
+.nav__icon:hover {
+  background: var(--paper-2);
+}
+.nav__icon:active {
+  transform: scale(0.94);
+}
+
+.nav__burger {
+  display: none;
+}
+
+.nav__progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--blue), var(--pink));
+}
+
+.nav__sheet {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: grid;
+  padding: 12px var(--gutter) 28px;
+  background: var(--paper);
+  box-shadow: 0 1px 0 var(--rule), 0 24px 40px -24px rgb(0 0 0 / 0.25);
+}
+.nav__sheet a {
+  padding: 12px 0;
+  font-size: 1.9rem;
+  font-weight: 800;
+  font-stretch: 80%;
+  line-height: 1.1;
+}
+.nav__sheet a:hover {
+  color: var(--pink-text);
+}
+
+@media (max-width: 900px) {
+  .nav__links {
+    display: none;
+  }
+  .nav__burger {
+    display: grid;
+  }
+}
+
+@media (max-width: 420px) {
+  .nav__cv {
+    display: none;
+  }
+}

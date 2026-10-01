@@ -1,0 +1,66 @@
+.dl {
+  display: grid;
+  gap: 10px;
+}
+
+.dl__svg {
+  width: 100%;
+  max-height: 200px;
+  font-family: var(--f-mono);
+}
+
+.dl__edge {
+  stroke: var(--ink-3);
+  stroke-width: 2;
+}
+.dl__edge.is-hot {
+  stroke: var(--pink);
+  stroke-width: 3;
+  stroke-dasharray: 6 5;
+  animation: dl-march 0.6s linear infinite;
+}
+@keyframes dl-march {
+  to {
+    stroke-dashoffset: -11;
+  }
+}
+.dl__head {
+  fill: var(--ink-3);
+}
+
+.dl__proc rect {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  transition: fill 0.3s;
+}
+.dl__proc text {
+  fill: var(--ink);
+  font-size: 12px;
+  font-weight: 500;
+  text-anchor: middle;
+}
+.dl__proc.is-hot rect {
+  fill: var(--pink);
+  stroke: transparent;
+}
+.dl__proc.is-hot text {
+  fill: #1c1c21;
+}
+
+.dl__side {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.dl__status {
+  margin: 0;
+  color: var(--blue-text);
+  font-weight: 500;
+}
+.dl__status.is-hot {
+  color: var(--pink-text);
+}

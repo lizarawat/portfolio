@@ -1,0 +1,63 @@
+/*
+  Two-ink risograph system.
+  Light: inks on newsprint, overprinted with multiply.
+  Dark (opt-in via the nav toggle): fluorescent inks on black stock, overprinted with screen.
+  Pink and blue are "inks" for graphics and display type; the -text
+  variants are darker pulls that keep body copy at WCAG AA.
+*/
+:root {
+  --paper: #efefe9;
+  --paper-2: #e5e5de;
+  --paper-3: #d9d9d1;
+  --ink: #1c1c21;
+  --ink-2: #4a4a52;
+  --ink-3: #6b6b72;
+  --rule: rgb(28 28 33 / 0.14);
+
+  --pink: #ff48b0;
+  --blue: #0078bf;
+  --pink-text: #c3137a;
+  --blue-text: #005f99;
+  --over: #6a2d86; /* what pink over blue actually prints as */
+  --on-flood: #efefe9;
+  --blend: multiply;
+  --dot-alpha: 0.92;
+
+  --f-display: 'Bricolage Grotesque Variable', 'Arial Narrow', system-ui, sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --r: 14px;          /* cards, plates, modal */
+  --r-pill: 999px;    /* buttons, chips, toggles */
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-ink: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --gutter: clamp(16px, 4vw, 56px);
+  --max: 1320px;
+
+  /* z-index scale */
+  --z-grain: 60;
+  --z-nav: 40;
+  --z-modal: 80;
+
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --paper: #131316;
+  --paper-2: #1b1b1f;
+  --paper-3: #26262b;
+  --ink: #ecebe6;
+  --ink-2: #b9b8b2;
+  --ink-3: #8e8d88;
+  --rule: rgb(236 235 230 / 0.14);
+  --pink: #ff5cbb;
+  --blue: #2e9bff;
+  --pink-text: #ff7cc8;
+  --blue-text: #6cb8ff;
+  --over: #d6b4ff;
+  --on-flood: #131316;
+  --blend: screen;
+  --dot-alpha: 0.85;
+  color-scheme: dark;
+}

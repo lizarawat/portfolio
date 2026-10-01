@@ -1,0 +1,172 @@
+.tm {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  padding: 20px 18px 8px;
+}
+
+/* Classic Toulmin layout:
+   Data ---(Qualifier)---> Claim
+            Warrant          Rebuttal
+            Backing                     */
+.tm__map {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 52px);
+  gap: 18px 10px;
+  isolation: isolate;
+}
+
+.tm__wires {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  vector-effect: non-scaling-stroke;
+}
+.tm__wires path {
+  vector-effect: non-scaling-stroke;
+}
+
+.tm__node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1.5px dashed var(--ink-3);
+  background: var(--paper);
+  text-align: left;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+.tm__node:hover {
+  transform: translate(-1px, -2px);
+}
+.tm__node.is-on {
+  border-style: solid;
+  border-color: transparent;
+  color: var(--on-flood);
+  background: var(--blue);
+  box-shadow: 3px 3px 0 var(--pink);
+}
+.tm__node--claim.is-on,
+.tm__node--rebuttal.is-on {
+  background: var(--pink);
+  box-shadow: 3px 3px 0 var(--blue);
+  color: #1c1c21;
+}
+
+.tm__node--data { grid-area: 1 / 1; }
+.tm__node--qualifier { grid-area: 1 / 2; }
+.tm__node--claim { grid-area: 1 / 3; }
+.tm__node--warrant { grid-area: 2 / 2; }
+.tm__node--rebuttal { grid-area: 2 / 3; }
+.tm__node--backing { grid-area: 3 / 2; }
+
+.tm__label {
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.1;
+}
+.tm__w {
+  font-size: 0.68rem;
+  opacity: 0.85;
+}
+
+.gauge {
+  position: relative;
+  display: grid;
+  justify-items: center;
+}
+.gauge svg {
+  width: 100%;
+  max-width: 220px;
+  overflow: visible;
+}
+.gauge__track,
+.gauge__fill {
+  fill: none;
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+.gauge__track {
+  stroke: var(--paper-3);
+}
+.gauge__fill {
+  stroke: var(--pink);
+}
+.gauge__tick {
+  stroke: var(--ink-3);
+  stroke-width: 2;
+}
+.gauge__needle {
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.gauge__hub {
+  fill: var(--ink);
+}
+.gauge__num {
+  margin-top: 10px;
+  font-weight: 800;
+  font-stretch: 76%;
+  font-size: 2.6rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.gauge__verdict {
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.tm__text {
+  min-height: 5.4em;
+  margin: 8px 18px 0;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--paper);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+.tm__frag {
+  display: inline;
+}
+.tm__frag--claim {
+  font-weight: 700;
+  background: linear-gradient(transparent 60%, color-mix(in oklab, var(--pink) 45%, transparent) 60%);
+}
+.tm__frag--rebuttal {
+  font-style: italic;
+}
+.tm__empty {
+  color: var(--ink-3);
+}
+
+.tm__tools {
+  display: flex;
+  gap: 6px;
+  padding: 12px 18px 16px;
+}
+
+@media (max-width: 560px) {
+  .tm {
+    grid-template-columns: 1fr;
+  }
+  .tm__map {
+    grid-template-rows: repeat(3, 58px);
+  }
+  .tm__label {
+    font-size: 0.8rem;
+  }
+}

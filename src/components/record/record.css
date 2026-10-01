@@ -1,0 +1,206 @@
+.rec {
+  padding: clamp(60px, 9vw, 130px) 0;
+  background: var(--paper-2);
+}
+
+.rec__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: start;
+}
+
+/* Education: report cards with the grade as the headline */
+.edu {
+  display: grid;
+  gap: 14px;
+  margin: 36px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.edu__card {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 18px 22px;
+  border-radius: var(--r);
+  background: var(--paper);
+  box-shadow: 0 1px 0 var(--rule), 0 14px 30px -24px rgb(20 20 40 / 0.5);
+}
+.edu__card:first-child {
+  box-shadow: 5px 5px 0 var(--blue);
+}
+.edu__score {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.edu__num {
+  font-weight: 800;
+  font-stretch: 76%;
+  font-size: 3.2rem;
+  line-height: 1;
+  color: var(--blue-text);
+  font-variant-numeric: tabular-nums;
+}
+.edu__card:first-child .edu__num {
+  color: var(--pink-text);
+}
+.edu__unit {
+  color: var(--ink-3);
+}
+.edu__school {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.edu__what {
+  margin: 2px 0 0;
+  color: var(--ink-2);
+}
+.edu__when {
+  margin: 6px 0 0;
+  color: var(--ink-3);
+}
+
+.train {
+  margin-top: 28px;
+  padding: 22px;
+  border-radius: var(--r);
+  border: 1.5px dashed var(--ink-3);
+}
+.train__head h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.train__head span {
+  color: var(--ink-3);
+}
+.train ul {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: var(--ink-2);
+  display: grid;
+  gap: 4px;
+}
+
+/* Receipt */
+.rc {
+  position: sticky;
+  top: 96px;
+  justify-self: center;
+  width: min(100%, 380px);
+}
+.rc__slot {
+  position: relative;
+  z-index: 2;
+  height: 18px;
+  margin: 0 -18px;
+  border-radius: 10px;
+  background: var(--ink);
+  box-shadow: inset 0 -5px 0 color-mix(in oklab, var(--ink) 60%, #000);
+}
+.rc__paper {
+  position: relative;
+  margin-top: -8px;
+  padding: 28px 24px 30px;
+  background: #fbfbf8;
+  color: #1c1c21;
+  box-shadow: 0 30px 50px -30px rgb(0 0 0 / 0.45);
+  /* Torn bottom edge */
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%;
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%;
+  padding-bottom: 40px;
+}
+.rc__paper .mono,
+.rc__paper {
+  font-family: var(--f-mono);
+}
+.rc__top {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  text-align: center;
+  color: #4a4a52;
+}
+.rc__top strong {
+  font-size: 1.05rem;
+  letter-spacing: 0.18em;
+  color: #1c1c21;
+}
+.rc__rule {
+  margin: 16px 0;
+  border-top: 1.5px dashed #9a9aa0;
+}
+.rc__items {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.82rem;
+}
+.rc__line {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.rc__what {
+  font-weight: 500;
+}
+.rc__line::after {
+  content: none;
+}
+.rc__when {
+  margin-left: auto;
+  white-space: nowrap;
+  color: #4a4a52;
+}
+.rc__where {
+  display: block;
+  color: #6b6b72;
+  font-size: 0.74rem;
+}
+.rc__total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+.rc__total strong {
+  font-size: 1.1rem;
+}
+.rc__bars {
+  display: flex;
+  justify-content: center;
+  height: 48px;
+}
+.rc__bars i {
+  display: block;
+  background: #1c1c21;
+}
+.rc__foot {
+  margin: 12px 0 0;
+  text-align: center;
+  font-size: 0.74rem;
+  color: #4a4a52;
+}
+
+@media (max-width: 900px) {
+  .rec__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rc {
+    position: relative;
+    top: 0;
+  }
+}
+@media (max-width: 480px) {
+  .edu__card {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}

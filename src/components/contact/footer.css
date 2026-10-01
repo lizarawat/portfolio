@@ -1,0 +1,41 @@
+.ft {
+  position: relative;
+  border-top: 1.5px solid var(--ink);
+}
+
+.ft__play {
+  position: relative;
+}
+
+.ft__canvas {
+  width: 100%;
+  height: clamp(260px, 30vw, 360px);
+  touch-action: pan-y;
+  cursor: grab;
+}
+.ft__canvas:active {
+  cursor: grabbing;
+}
+
+.ft__caption {
+  position: absolute;
+  top: 18px;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+.ft__caption p {
+  margin: 0;
+  max-width: 56ch;
+  color: var(--ink-3);
+}
+
+.ft__bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px 24px;
+  padding-block: 22px 28px;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-2);
+}
