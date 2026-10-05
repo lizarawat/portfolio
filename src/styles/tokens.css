@@ -18,6 +18,13 @@
   --blue: #0078bf;
   --pink-text: #c3137a;
   --blue-text: #005f99;
+  --emerald: #059669;
+  --violet: #7c3aed;
+  --amber: #d97706;
+  --glow-pink: rgba(255, 72, 176, 0.35);
+  --glow-blue: rgba(0, 120, 191, 0.35);
+  --glow-emerald: rgba(5, 150, 105, 0.35);
+
   --over: #6a2d86; /* what pink over blue actually prints as */
   --on-flood: #efefe9;
   --blend: multiply;
@@ -55,6 +62,13 @@
   --blue: #2e9bff;
   --pink-text: #ff7cc8;
   --blue-text: #6cb8ff;
+  --emerald: #10b981;
+  --violet: #a855f7;
+  --amber: #f59e0b;
+  --glow-pink: rgba(255, 92, 187, 0.4);
+  --glow-blue: rgba(46, 155, 255, 0.4);
+  --glow-emerald: rgba(16, 185, 129, 0.4);
+
   --over: #d6b4ff;
   --on-flood: #131316;
   --blend: screen;

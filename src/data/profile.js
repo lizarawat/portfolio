@@ -23,7 +23,7 @@ export const profile = Object.freeze({
 })
 
 export const stats = Object.freeze([
-  { value: 350, suffix: '+', label: 'DSA problems solved', note: 'LeetCode and GeeksforGeeks' },
+  { value: 400, suffix: '+', label: 'DSA problems solved', note: 'LeetCode and GeeksforGeeks' },
   { value: 1.21, suffix: 'B+', decimals: 2, label: 'census records processed', note: 'Census 2011 EDA' },
   { value: 200, prefix: '<', suffix: 'ms', label: 'ticker streaming latency', note: 'TradeCraft WebSockets' },
   { value: 8.85, decimals: 2, label: 'CGPA, B.Tech CSE', note: 'Lovely Professional University' },

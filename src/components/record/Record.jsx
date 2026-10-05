@@ -41,7 +41,7 @@ function Receipt({ section }) {
         <div className="rc__rule" aria-hidden="true" />
         <div className="rc__total mono">
           <span>Problems solved</span>
-          <strong>350+</strong>
+          <strong>400+</strong>
         </div>
         <div className="rc__total mono">
           <span>Certificates held</span>

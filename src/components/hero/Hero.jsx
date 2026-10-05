@@ -91,7 +91,12 @@ export default function Hero() {
     <section className="hero" id="top">
       <div className="hero__grid wrap">
         <div className="hero__copy">
-          <motion.p className="hero__eyebrow mono" {...rise(0.05)}>
+          <motion.div className="hero__status-badge" {...rise(0.02)}>
+            <span className="hero__status-dot" />
+            <span className="mono">{profile.status}</span>
+          </motion.div>
+
+          <motion.p className="hero__eyebrow mono" {...rise(0.08)}>
             {profile.role}
           </motion.p>
           <Name />
@@ -99,7 +104,7 @@ export default function Hero() {
             {profile.lede}
           </motion.p>
           <motion.div className="hero__ctas" {...rise(1.08)}>
-            <a className="btn" href="#work">
+            <a className="btn btn--glow" href="#work">
               See the work <ArrowDown size={16} weight="bold" />
             </a>
             <a className="btn btn--ghost" href="#contact">

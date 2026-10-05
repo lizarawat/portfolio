@@ -1,5 +1,5 @@
 export const achievements = Object.freeze([
-  { what: '350+ DSA problems solved', where: 'LeetCode & GeeksforGeeks', when: 'Ongoing' },
+  { what: '400+ DSA problems solved', where: 'LeetCode & GeeksforGeeks', when: 'Ongoing' },
   { what: 'Pre-finalist, AlgoArena Hackathon', where: 'TheEduCode by Eduniketan', when: 'Apr 2026' },
   { what: 'Algo Arena 2.0 coding competition', where: 'Eduniketan / TheEduCode', when: '2026' },
   { what: 'Cryptic Clues Hackathon', where: 'Optimyzr for Success', when: '2025' },
