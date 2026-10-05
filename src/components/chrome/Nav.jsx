@@ -32,11 +32,10 @@ export default function Nav() {
     <header className={`nav ${raised ? 'is-raised' : ''}`}>
       <div className="nav__inner wrap">
         <a href="#top" className="nav__mark" aria-label="Liza Rawat, back to top">
-          <span className="nav__reg" aria-hidden="true" />
-          <span className="nav__mono">
-            <span className="nav__mono-b">{profile.initials}</span>
-            <span className="nav__mono-p">{profile.initials}</span>
+          <span className="nav__brand-badge">
+            <span className="nav__brand-text">{profile.initials}</span>
           </span>
+          <span className="nav__brand-name">{profile.name}</span>
         </a>
 
         <nav className="nav__links" aria-label="Sections">

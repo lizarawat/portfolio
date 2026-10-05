@@ -1,27 +1,15 @@
-.op {
-  display: grid;
+.op-heading {
+  display: block;
   margin: 0;
   font-family: var(--f-display);
   font-weight: 800;
-  font-stretch: 78%;
-  font-variation-settings: 'opsz' 96;
-  line-height: 0.92;
-  letter-spacing: -0.02em;
+  font-stretch: 84%;
+  line-height: 0.96;
+  letter-spacing: -0.025em;
   font-size: clamp(2.6rem, 6.4vw, 5.6rem);
-  isolation: isolate;
 }
 
-.op__layer {
-  grid-area: 1 / 1;
-  display: block;
-  padding-bottom: 0.06em;
-}
-
-.op__blue {
-  color: var(--blue);
-}
-
-.op__pink {
-  color: var(--pink);
-  mix-blend-mode: var(--blend);
+.op-heading__text {
+  color: var(--ink);
+  background-clip: text;
 }
