@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { ArrowUpRight, Sparkle, Compass } from '@phosphor-icons/react'
 import { profile } from '../../data/profile.js'
-import HeroFlipCard from './HeroFlipCard.jsx'
+import Hero3DBlock from './Hero3DBlock.jsx'
 import './hero.css'
 
 const rise = (delay) => ({
@@ -45,7 +45,7 @@ export default function Hero() {
         </div>
 
         <div className="hero__terminal-wrap">
-          <HeroFlipCard />
+          <Hero3DBlock />
         </div>
       </div>
     </section>
