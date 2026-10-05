@@ -42,52 +42,34 @@ export default function TradeCraftShowcase({ project, onPreview }) {
           <div className="tc-showcase__left">
             <h3 className="tc-subheading">Core Modules & Architecture</h3>
 
-            <div className="tc-modules-grid">
-              <div className="module-item">
-                <div className="module-icon"><ChartLineUp size={18} weight="bold" /></div>
-                <div>
-                  <h4 className="module-name">Trading Dashboard</h4>
-                  <p className="module-desc">NIFTY 50/Bank tickers, Available Margin (₹4.34L+), Investment tracking & +33.88% Net P&L analytics.</p>
+            <div className="tc-big-module-box">
+              <div className="tc-feature-row">
+                <div className="tc-feature-icon"><ChartLineUp size={22} weight="bold" /></div>
+                <div className="tc-feature-content">
+                  <h4 className="tc-feature-title">Trading Dashboard & Paper Simulator</h4>
+                  <p className="tc-feature-desc">
+                    Real-time paper trading desk streaming NIFTY 50 & NIFTY Bank tickers. Place simulated market orders across 20+ NSE blue-chip equities (Reliance, TCS, M&M, INFY) with ₹10 Lakhs+ in virtual capital and zero financial risk.
+                  </p>
                 </div>
               </div>
 
-              <div className="module-item">
-                <div className="module-icon"><Play size={18} weight="bold" /></div>
-                <div>
-                  <h4 className="module-name">Paper Trading Simulator</h4>
-                  <p className="module-desc">Simulated order execution desk across 20+ NSE blue-chips (Reliance, TCS, M&M, INFY) with zero financial risk.</p>
+              <div className="tc-feature-row">
+                <div className="tc-feature-icon"><ShieldCheck size={22} weight="bold" /></div>
+                <div className="tc-feature-content">
+                  <h4 className="tc-feature-title">Portfolio Management & Ledger</h4>
+                  <p className="tc-feature-desc">
+                    Live position tracking, cost basis calculations, and P&L analytics (achieving +33.88% net simulated return). Includes secure 2-step email authentication for isolated user ledgers.
+                  </p>
                 </div>
               </div>
 
-              <div className="module-item">
-                <div className="module-icon"><ShieldCheck size={18} weight="bold" /></div>
-                <div>
-                  <h4 className="module-name">Portfolio & Ledger</h4>
-                  <p className="module-desc">Real-time position tracking, total return calculations, and simulated capital management across ₹10 Lakhs+.</p>
-                </div>
-              </div>
-
-              <div className="module-item">
-                <div className="module-icon"><BookOpen size={18} weight="bold" /></div>
-                <div>
-                  <h4 className="module-name">Lessons & Quizzes</h4>
-                  <p className="module-desc">Structured learning path with XP rewards (+150 XP per module) to master technical analysis and chart patterns.</p>
-                </div>
-              </div>
-
-              <div className="module-item">
-                <div className="module-icon"><Newspaper size={18} weight="bold" /></div>
-                <div>
-                  <h4 className="module-name">News Room & NLP</h4>
-                  <p className="module-desc">Live market news feed automatically scored using FinBERT NLP to classify Bullish (+), Bearish (-), or Neutral sentiment.</p>
-                </div>
-              </div>
-
-              <div className="module-item">
-                <div className="module-icon"><LockKey size={18} weight="bold" /></div>
-                <div>
-                  <h4 className="module-name">Email Authentication</h4>
-                  <p className="module-desc">Secure 2-step email authentication guaranteeing individual virtual ledgers and portfolio isolation.</p>
+              <div className="tc-feature-row">
+                <div className="tc-feature-icon"><Newspaper size={22} weight="bold" /></div>
+                <div className="tc-feature-content">
+                  <h4 className="tc-feature-title">FinBERT NLP Sentiment & Interactive Learning</h4>
+                  <p className="tc-feature-desc">
+                    Live market news feed automatically scored using FinBERT NLP for Bullish (+), Bearish (-), or Neutral sentiment. Includes structured lessons and interactive quizzes with XP rewards (+150 XP) to master chart patterns.
+                  </p>
                 </div>
               </div>
             </div>
