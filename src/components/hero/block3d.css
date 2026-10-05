@@ -1,60 +1,62 @@
-.block3d-stage {
-  width: min(100%, 450px);
-  height: 320px;
-  perspective: 1200px;
-  -webkit-perspective: 1200px;
-  cursor: grab;
+.earth-spin-stage {
+  width: min(100%, 350px);
+  height: 350px;
+  aspect-ratio: 1 / 1;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+  cursor: pointer;
   margin-inline: auto;
   position: relative;
-  touch-action: none;
+  overflow: visible !important;
 }
 
-.block3d-stage:active {
-  cursor: grabbing;
-}
-
-.block3d-cube {
+.earth-spin-cube {
   position: relative;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
-  transform-origin: center center;
 }
 
-/* 3D FACES & SIDES */
-.block3d-face {
+/* BOTH FACES: FRONT (0deg) & BACK (180deg) */
+.earth-face {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  border-radius: var(--r);
+  border-radius: 20px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: color-mix(in oklab, var(--paper-2) 94%, transparent);
+  background: color-mix(in oklab, var(--paper-2) 92%, transparent);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1.5px solid color-mix(in oklab, var(--blue) 40%, var(--rule));
-  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.3), 0 0 30px -5px var(--glow-blue);
+  border: 1.5px solid color-mix(in oklab, var(--blue) 50%, var(--rule));
+  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.35), 0 0 30px -5px var(--glow-blue);
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
+  transition: border-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
 }
 
-/* FRONT FACE (translated Z forward by +14px for 3D depth) */
-.block3d-front {
-  transform: translateZ(14px) rotateY(0deg);
-  -webkit-transform: translateZ(14px) rotateY(0deg);
+.earth-spin-stage:hover .earth-face {
+  border-color: var(--blue);
+  box-shadow: 0 24px 60px -15px var(--glow-blue);
+}
+
+/* FRONT FACE: 0deg */
+.earth-front {
+  transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
   z-index: 2;
 }
 
-/* BACK FACE (translated Z backward by -14px and rotated 180deg) */
-.block3d-back {
-  transform: translateZ(-14px) rotateY(180deg);
-  -webkit-transform: translateZ(-14px) rotateY(180deg);
+/* BACK FACE: 180deg */
+.earth-back {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
   z-index: 1;
   text-align: center;
   align-items: center;
@@ -62,57 +64,7 @@
   gap: 16px;
 }
 
-/* 3D SIDE EDGES (3D Thickness of 28px!) */
-.block3d-side {
-  position: absolute;
-  background: linear-gradient(135deg, color-mix(in oklab, var(--blue) 50%, #1e293b), color-mix(in oklab, var(--violet) 50%, #0f172a));
-  border: 1px solid color-mix(in oklab, var(--blue) 60%, transparent);
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.block3d-right {
-  width: 28px;
-  height: 100%;
-  top: 0;
-  right: -14px;
-  transform: rotateY(90deg);
-  -webkit-transform: rotateY(90deg);
-  border-radius: 4px;
-}
-
-.block3d-left {
-  width: 28px;
-  height: 100%;
-  top: 0;
-  left: -14px;
-  transform: rotateY(-90deg);
-  -webkit-transform: rotateY(-90deg);
-  border-radius: 4px;
-}
-
-.block3d-top {
-  width: 100%;
-  height: 28px;
-  top: -14px;
-  left: 0;
-  transform: rotateX(90deg);
-  -webkit-transform: rotateX(90deg);
-  border-radius: 4px;
-}
-
-.block3d-bottom {
-  width: 100%;
-  height: 28px;
-  bottom: -14px;
-  left: 0;
-  transform: rotateX(-90deg);
-  -webkit-transform: rotateX(-90deg);
-  border-radius: 4px;
-}
-
-/* Front Face Typography & Details */
+/* Front Face Elements */
 .face-header {
   display: flex;
   align-items: center;
@@ -133,19 +85,9 @@
   color: var(--blue);
 }
 
-.flip-hint {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.72rem;
-  color: var(--ink-3);
-  opacity: 0.8;
-}
-
 .face-content {
   margin-block: auto;
   position: relative;
-  padding-left: 8px;
 }
 
 .quote-icon {
@@ -155,7 +97,7 @@
 
 .quote-text {
   margin: 0;
-  font-size: 1.18rem;
+  font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.5;
   color: var(--ink);
@@ -165,6 +107,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-top: 12px;
 }
 
 .stat-chip {
@@ -177,10 +120,10 @@
   color: var(--ink-2);
 }
 
-/* Back Face Photo & Details */
+/* Back Face Elements (Liza's Photo & Details) */
 .back-photo-wrapper {
-  width: 130px;
-  height: 130px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid var(--blue);
@@ -203,7 +146,7 @@
 
 .back-name {
   margin: 0;
-  font-size: 1.55rem;
+  font-size: 1.6rem;
   font-weight: 800;
   letter-spacing: -0.02em;
 }
