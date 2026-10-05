@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { motion } from 'motion/react'
 import { Sparkle, ArrowClockwise, Quotes } from '@phosphor-icons/react'
 import { profile } from '../../data/profile.js'
 import './flipcard.css'
@@ -15,25 +14,10 @@ export default function HeroFlipCard() {
       onClick={() => setIsFlipped((prev) => !prev)}
       role="button"
       tabIndex={0}
-      aria-label="Interactive developer card, hover or tap to flip for photo"
+      aria-label="Interactive developer card, hover or tap to flip 180 degrees"
       onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setIsFlipped((prev) => !prev)}
     >
-      <motion.div
-        className="flip-card-inner"
-        initial={{ opacity: 0, y: 25, scale: 0.95, rotateY: 0 }}
-        animate={{
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          rotateY: isFlipped ? 180 : 0,
-        }}
-        transition={{
-          rotateY: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-          opacity: { duration: 0.8 },
-          y: { duration: 0.8 },
-        }}
-        style={{ transformStyle: 'preserve-3d' }}
-      >
+      <div className={`flip-card-inner ${isFlipped ? 'is-flipped' : ''}`}>
         {/* FRONT FACE: Quote & Tech Badges */}
         <div className="flip-card-face flip-card-front">
           <div className="face-header">
@@ -60,7 +44,7 @@ export default function HeroFlipCard() {
           </div>
         </div>
 
-        {/* BACK FACE: Real Photo & Personal Details */}
+        {/* BACK FACE: Real Photo & Details (Rotated 180 deg) */}
         <div className="flip-card-face flip-card-back">
           <div className="back-photo-wrapper">
             <img src={profile.photo || '/liza.jpg'} alt={profile.name} className="back-photo-img" />
@@ -72,7 +56,7 @@ export default function HeroFlipCard() {
             <p className="back-school mono">B.Tech CSE • Lovely Professional University</p>
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }
