@@ -25,17 +25,26 @@ export default function BackgroundWaves() {
       'dijkstra(graph, src, dst) -> min_cost',
       'df.groupby("state")["literacy"].mean()',
       'const ws = new WebSocket("wss://ticker");',
-      '01001100 01001001 01011010 01000001',
       'tf.keras.layers.Dense(units=128, activation="relu")',
     ]
 
-    const items = Array.from({ length: 18 }, (_, i) => ({
+    const items = Array.from({ length: 16 }, (_, i) => ({
       text: CODES[i % CODES.length],
       x: Math.random() * width,
       y: Math.random() * height,
-      speed: 0.3 + Math.random() * 0.4,
-      size: 11 + Math.random() * 3,
-      alpha: 0.04 + Math.random() * 0.08,
+      speed: 0.25 + Math.random() * 0.35,
+      alpha: 0.12 + Math.random() * 0.1,
+    }))
+
+    // Small red numbers floating left to right periodically
+    const RED_NUMS = ['0101', '400+', '10101', '01', '10010', '8.85', '1.21B', '1101', '0010']
+    const redParticles = Array.from({ length: 14 }, (_, i) => ({
+      text: RED_NUMS[i % RED_NUMS.length],
+      x: Math.random() * width,
+      y: (height * 0.1) + Math.random() * (height * 0.8),
+      speed: 0.6 + Math.random() * 0.8,
+      size: 11 + Math.random() * 2,
+      alpha: 0.35 + Math.random() * 0.3,
     }))
 
     let phase = 0
@@ -44,19 +53,31 @@ export default function BackgroundWaves() {
       ctx.clearRect(0, 0, width, height)
       phase += 0.008
 
-      // Draw subtle sine wave lines
+      // Draw high-visibility sine wave lines
       ctx.beginPath()
-      ctx.lineWidth = 1.2
-      for (let x = 0; x < width; x += 8) {
-        const y1 = height * 0.3 + Math.sin(x * 0.003 + phase) * 40 + Math.cos(x * 0.001) * 20
-        const y2 = height * 0.7 + Math.cos(x * 0.002 - phase * 0.8) * 45
+      ctx.lineWidth = 1.4
+      for (let x = 0; x < width; x += 6) {
+        const y1 = height * 0.3 + Math.sin(x * 0.003 + phase) * 45 + Math.cos(x * 0.001) * 20
         if (x === 0) {
           ctx.moveTo(x, y1)
         } else {
           ctx.lineTo(x, y1)
         }
       }
-      ctx.strokeStyle = 'rgba(100, 116, 139, 0.07)'
+      ctx.strokeStyle = 'rgba(71, 85, 105, 0.25)'
+      ctx.stroke()
+
+      ctx.beginPath()
+      ctx.lineWidth = 1.2
+      for (let x = 0; x < width; x += 6) {
+        const y2 = height * 0.68 + Math.cos(x * 0.002 - phase * 0.8) * 50
+        if (x === 0) {
+          ctx.moveTo(x, y2)
+        } else {
+          ctx.lineTo(x, y2)
+        }
+      }
+      ctx.strokeStyle = 'rgba(99, 102, 241, 0.2)'
       ctx.stroke()
 
       // Draw floating code snippets
@@ -67,8 +88,20 @@ export default function BackgroundWaves() {
           item.y = height + 30
           item.x = Math.random() * width
         }
-        ctx.fillStyle = `rgba(148, 163, 184, ${item.alpha})`
+        ctx.fillStyle = `rgba(100, 116, 139, ${item.alpha})`
         ctx.fillText(item.text, item.x, item.y)
+      })
+
+      // Draw floating small RED NUMBERS moving left to right
+      redParticles.forEach((p) => {
+        p.x += p.speed
+        if (p.x > width + 40) {
+          p.x = -50
+          p.y = (height * 0.1) + Math.random() * (height * 0.8)
+        }
+        ctx.font = `600 ${p.size}px "IBM Plex Mono", monospace`
+        ctx.fillStyle = `rgba(239, 68, 68, ${p.alpha})`
+        ctx.fillText(p.text, p.x, p.y)
       })
 
       animationFrameId = requestAnimationFrame(render)
@@ -90,7 +123,7 @@ export default function BackgroundWaves() {
         inset: 0,
         pointerEvents: 'none',
         zIndex: 0,
-        opacity: 0.85,
+        opacity: 0.9,
       }}
       aria-hidden="true"
     />

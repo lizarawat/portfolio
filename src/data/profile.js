@@ -8,7 +8,7 @@ export const profile = Object.freeze({
   last: 'Rawat',
   initials: 'LR',
   role: 'Data engineering & AI/ML',
-  lede: 'Building scalable data pipelines, ML models and analytics systems. B.Tech CSE at Lovely Professional University.',
+  lede: 'Building scalable data pipelines and robust machine learning models and analytics systems while playing with data to solve real world problems.',
   objective:
     'To start my career in Data Engineering and Artificial Intelligence, applying my skills to real problems, building scalable systems and growing as an engineer.',
   photo: '/liza.jpg',

@@ -2,31 +2,14 @@
 
 .badge-container {
   position: relative;
-  width: min(100%, 350px);
+  width: min(100%, 365px);
   margin-inline: auto;
-  padding-top: 24px;
-}
-
-/* Pinned Orange Lanyard Tag at top */
-.lanyard-tag {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  background: linear-gradient(135deg, #f97316, #ea580c);
-  color: #ffffff;
-  padding: 4px 14px;
-  border-radius: var(--r-pill);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+  padding-top: 0;
 }
 
 .badge-card {
   width: 100%;
-  height: 520px;
+  height: 590px;
   perspective: 1200px;
   -webkit-perspective: 1200px;
   cursor: pointer;
@@ -120,18 +103,18 @@
 .badge-photo-box {
   position: relative;
   width: 100%;
-  height: 190px;
+  height: 255px;
   border-radius: 12px;
   overflow: hidden;
   margin-top: 10px;
-  background: #e2e8f0;
+  background: #009688;
 }
 
 .badge-photo {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  object-position: center top;
 }
 
 .work-status-tag {

@@ -20,10 +20,6 @@ export default function Hero() {
             <span className="mono">{profile.status}</span>
           </motion.div>
 
-          <motion.p className="hero__eyebrow mono" {...rise(0.08)}>
-            <Sparkle size={14} weight="fill" className="hero__sparkle-icon" />
-            {profile.role}
-          </motion.p>
 
           <motion.h1 className="hero__name" {...rise(0.18)}>
             <span className="hero__name-line">{profile.first}</span>

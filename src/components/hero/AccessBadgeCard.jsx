@@ -7,8 +7,6 @@ export default function AccessBadgeCard() {
 
   return (
     <div className="badge-container">
-      {/* Pinned Lanyard Tag */}
-      <div className="lanyard-tag mono">DATA & AI</div>
 
       <div
         className="badge-card"

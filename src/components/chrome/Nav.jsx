@@ -67,22 +67,22 @@ export default function Nav() {
           </button>
           
           <a
-            className="btn btn--sm btn--ghost nav__social"
+            className="nav__icon"
             href={profile.github}
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub Profile"
           >
-            <GithubLogo size={16} weight="bold" /> <span className="nav__social-text">GitHub</span>
+            <GithubLogo size={18} weight="bold" />
           </a>
           <a
-            className="btn btn--sm btn--ghost nav__social"
+            className="nav__icon"
             href={profile.linkedin}
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn Profile"
           >
-            <LinkedinLogo size={16} weight="bold" /> <span className="nav__social-text">LinkedIn</span>
+            <LinkedinLogo size={18} weight="bold" />
           </a>
           <a className="btn btn--sm nav__cv" href={profile.cv} download>
             <DownloadSimple size={16} weight="bold" /> CV
