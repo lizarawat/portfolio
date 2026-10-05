@@ -4,6 +4,7 @@ import { ArrowUpRight, GithubLogo } from '@phosphor-icons/react'
 import { featured, more } from '../../data/projects.js'
 import Overprint from '../ui/Overprint.jsx'
 import ProjectSpread from './ProjectSpread.jsx'
+import TradeCraftShowcase from './TradeCraftShowcase.jsx'
 import PreviewModal from './PreviewModal.jsx'
 import './work.css'
 
@@ -65,13 +66,16 @@ export default function Work() {
         <header className="work__head">
           <Overprint id="work-title" className="work__title">Selected work</Overprint>
           <p className="work__intro">
-            Every project below ships with a working plate built from the same logic. Poke at them.
+            Interactive, full-stack systems built with real data feeds, ML models, and high-performance algorithms.
           </p>
         </header>
 
-        {featured.map((p, i) => (
-          <ProjectSpread key={p.id} project={p} layout={LAYOUTS[i]} onPreview={setPreview} />
-        ))}
+        {featured.map((p, i) => {
+          if (p.id === 'tradecraft') {
+            return <TradeCraftShowcase key={p.id} project={p} onPreview={setPreview} />
+          }
+          return <ProjectSpread key={p.id} project={p} layout={LAYOUTS[i]} onPreview={setPreview} />
+        })}
 
         <h3 className="work__more">More projects</h3>
         <div className="work__minis">
