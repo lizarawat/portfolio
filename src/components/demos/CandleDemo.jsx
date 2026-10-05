@@ -8,49 +8,42 @@ import { nextCandle, series, rsi, signal } from '../../lib/market.js'
 import Plate, { PlateButton } from './Plate.jsx'
 
 const VISIBLE = 46
-const CANDLE_MS = 700
-const SHOCK_CANDLES = 7
 
-// A simulated intraday feed: candles form tick by tick, RSI(14) runs under
-// them, and "news" buttons tilt the drift the way a sentiment score would.
+// Simulated intraday candlestick feed with 1m, 2m, 5m timeframe intervals and trendlines
 export default function CandleDemo() {
   const inks = useInks()
   const reduce = useReducedMotion()
   const [paused, setPaused] = useState(false)
+  const [timeframe, setTimeframe] = useState('1m') // '1m' | '2m' | '5m'
+  const [showTrendlines, setShowTrendlines] = useState(true)
+
+  const candleIntervals = { '1m': 350, '2m': 700, '5m': 1200 }
+  const currentInterval = candleIntervals[timeframe] || 500
+
   const sim = useRef(null)
   if (!sim.current) {
     const rand = rng(20260601)
     const candles = series(VISIBLE + 16, 2462, rand)
-    sim.current = { rand, candles, live: null, acc: 0, shock: 0, drift: 0.0002, tickAcc: 0, newsTimer: 0 }
+    sim.current = { rand, candles, live: null, acc: 0, shock: 0, drift: 0.0002, tickAcc: 0 }
   }
+
   const [read, setRead] = useState(() => {
     const closes = sim.current.candles.map((c) => c.close)
     const r = rsi(closes).at(-1)
-    return { price: closes.at(-1), rsi: r, sig: signal(r), news: 'neutral' }
+    return { price: closes.at(-1), rsi: r, sig: signal(r) }
   })
-
-  const news = (dir) => {
-    const s = sim.current
-    s.shock = SHOCK_CANDLES
-    s.drift = dir * 0.006
-    s.newsTimer = (SHOCK_CANDLES * CANDLE_MS) / 1000
-    setRead((r) => ({ ...r, news: dir > 0 ? 'positive' : 'negative' }))
-  }
 
   const ref = useCanvas((ctx, { w, h }, _t, dt) => {
     const s = sim.current
-    if (s.newsTimer > 0 && !paused) {
-      s.newsTimer -= dt
-      if (s.newsTimer <= 0) setRead((r) => ({ ...r, news: 'neutral' }))
-    }
     if (!paused && !reduce) {
       s.acc += dt * 1000
       s.tickAcc += dt * 1000
       const last = s.candles.at(-1)
       if (!s.live) s.live = { open: last.close, high: last.close, low: last.close, close: last.close }
-      if (s.tickAcc > 90) {
+
+      if (s.tickAcc > 80) {
         s.tickAcc = 0
-        const step = nextCandle(s.live.close, s.rand, { drift: s.drift / 8, vol: 0.0035, ticks: 2 })
+        const step = nextCandle(s.live.close, s.rand, { drift: s.drift, vol: 0.0035, ticks: 2 })
         s.live = {
           open: s.live.open,
           close: step.close,
@@ -58,19 +51,18 @@ export default function CandleDemo() {
           low: Math.min(s.live.low, step.low),
         }
       }
-      if (s.acc > CANDLE_MS) {
+
+      if (s.acc > currentInterval) {
         s.acc = 0
         s.candles = [...s.candles.slice(-(VISIBLE + 40)), s.live]
         s.live = null
-        if (s.shock > 0 && --s.shock === 0) s.drift = 0.0002
         const closes = s.candles.map((c) => c.close)
         const r = rsi(closes).at(-1)
-        setRead((prev) => ({
+        setRead({
           price: closes.at(-1),
           rsi: r,
           sig: signal(r),
-          news: prev.news,
-        }))
+        })
       }
     }
 
@@ -78,10 +70,12 @@ export default function CandleDemo() {
     const view = all.slice(-VISIBLE)
     const closes = all.map((c) => c.close)
     const rs = rsi(closes).slice(-VISIBLE)
-    const priceH = h * 0.68
-    const rsiTop = priceH + 18
-    const rsiH = h - rsiTop - 10
+
+    const priceH = h * 0.65
+    const rsiTop = priceH + 16
+    const rsiH = h - rsiTop - 8
     const pad = 12
+
     const hi = Math.max(...view.map((c) => c.high))
     const lo = Math.min(...view.map((c) => c.low))
     const span = hi - lo || 1
@@ -90,6 +84,8 @@ export default function CandleDemo() {
     const ry = (v) => rsiTop + (1 - v / 100) * rsiH
 
     ctx.clearRect(0, 0, w, h)
+
+    // RSI Bounds
     ctx.strokeStyle = inks.rule
     ctx.lineWidth = 1
     ctx.setLineDash([3, 4])
@@ -101,9 +97,34 @@ export default function CandleDemo() {
     }
     ctx.setLineDash([])
     ctx.fillStyle = inks.ink3
-    ctx.font = '500 10px "IBM Plex Mono", monospace'
-    ctx.fillText('RSI 70', pad + 2, ry(70) - 4)
-    ctx.fillText('30', pad + 2, ry(30) - 4)
+    ctx.font = '500 9px "IBM Plex Mono", monospace'
+    ctx.fillText('RSI 70', pad + 2, ry(70) - 3)
+    ctx.fillText('30', pad + 2, ry(30) - 3)
+
+    // Trendlines (Support & Resistance)
+    if (showTrendlines && view.length > 5) {
+      const firstX = pad + cw / 2
+      const lastX = pad + (view.length - 1) * cw + cw / 2
+
+      ctx.strokeStyle = 'rgba(59, 130, 246, 0.45)' // Blue trendline
+      ctx.lineWidth = 1.5
+      ctx.setLineDash([4, 4])
+
+      // Resistance line (Connecting highs)
+      ctx.beginPath()
+      ctx.moveTo(firstX, y(view[0].high))
+      ctx.lineTo(lastX, y(view[view.length - 1].high))
+      ctx.stroke()
+
+      // Support line (Connecting lows)
+      ctx.strokeStyle = 'rgba(236, 72, 153, 0.45)' // Pink trendline
+      ctx.beginPath()
+      ctx.moveTo(firstX, y(view[0].low))
+      ctx.lineTo(lastX, y(view[view.length - 1].low))
+      ctx.stroke()
+
+      ctx.setLineDash([])
+    }
 
     ctx.globalCompositeOperation = inks.blend
     view.forEach((c, i) => {
@@ -129,17 +150,6 @@ export default function CandleDemo() {
         ctx.lineTo(x, ry(r))
         ctx.stroke()
         ctx.lineWidth = 1
-        const crossedDown = prev > 30 && r <= 30
-        const crossedUp = prev < 70 && r >= 70
-        if (crossedDown || crossedUp) {
-          ctx.fillStyle = crossedDown ? inks.blue : inks.pink
-          const my = crossedDown ? y(c.low) + 12 : y(c.high) - 12
-          ctx.beginPath()
-          ctx.moveTo(x, my + (crossedDown ? -6 : 6))
-          ctx.lineTo(x - 5, my + (crossedDown ? 3 : -3))
-          ctx.lineTo(x + 5, my + (crossedDown ? 3 : -3))
-          ctx.fill()
-        }
       }
     })
     ctx.globalCompositeOperation = 'source-over'
@@ -154,30 +164,32 @@ export default function CandleDemo() {
     ctx.setLineDash([])
   })
 
-  const sigLabel = { buy: 'Buy', sell: 'Sell', hold: 'Hold' }[read.sig]
+  const sigLabel = { buy: 'BUY', sell: 'SELL', hold: 'HOLD' }[read.sig]
+
   return (
     <Plate
-      title="Paper desk"
-      note="Simulated feed"
+      title="NSE PAPER FEED"
+      note={`Candles (${timeframe})`}
       tools={
         <>
-          <PlateButton onClick={() => news(1)} active={read.news === 'positive'}>+ Good news</PlateButton>
-          <PlateButton onClick={() => news(-1)} active={read.news === 'negative'}>- Bad news</PlateButton>
+          <PlateButton active={timeframe === '1m'} onClick={() => setTimeframe('1m')}>1m</PlateButton>
+          <PlateButton active={timeframe === '2m'} onClick={() => setTimeframe('2m')}>2m</PlateButton>
+          <PlateButton active={timeframe === '5m'} onClick={() => setTimeframe('5m')}>5m</PlateButton>
+          <PlateButton active={showTrendlines} onClick={() => setShowTrendlines((v) => !v)}>Trendlines</PlateButton>
           <PlateButton onClick={() => setPaused((p) => !p)} aria-label={paused ? 'Resume feed' : 'Pause feed'}>
-            {paused ? <Play size={12} weight="fill" /> : <Pause size={12} weight="fill" />}
+            {paused ? <Play size={11} weight="fill" /> : <Pause size={11} weight="fill" />}
           </PlateButton>
         </>
       }
       readout={
         <>
-          <span>Last <b>₹{read.price ? read.price.toFixed(2) : '...'}</b></span>
+          <span>NSE <b>₹{read.price ? read.price.toFixed(2) : '...'}</b></span>
           <span>RSI(14) <b>{read.rsi == null ? '...' : read.rsi.toFixed(1)}</b></span>
           <span>Signal <b className={`sig sig--${read.sig}`}>{sigLabel}</b></span>
-          <span>Sentiment <b>{read.news}</b></span>
         </>
       }
     >
-      <canvas ref={ref} className="demo-canvas demo-canvas--candles" role="img" aria-label="Live candlestick chart with RSI indicator" />
+      <canvas ref={ref} className="demo-canvas demo-canvas--candles" role="img" aria-label="Live candlestick chart with 1m, 2m, 5m timeframes and trendlines" />
     </Plate>
   )
 }
