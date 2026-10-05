@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
-import { ArrowDown, ArrowUpRight, Sparkle } from '@phosphor-icons/react'
+import { ArrowUpRight, Sparkle, Compass } from '@phosphor-icons/react'
 import { profile } from '../../data/profile.js'
-import HeroCard from './HeroCard.jsx'
+import HeroFlipCard from './HeroFlipCard.jsx'
 import './hero.css'
 
 const rise = (delay) => ({
@@ -17,7 +17,7 @@ export default function Hero() {
         <div className="hero__copy">
           <motion.div className="hero__status-badge" {...rise(0.02)}>
             <span className="hero__status-dot" />
-            <span className="mono">{profile.status} • 0 NullPointers in Prod</span>
+            <span className="mono">{profile.status}</span>
           </motion.div>
 
           <motion.p className="hero__eyebrow mono" {...rise(0.08)}>
@@ -36,16 +36,16 @@ export default function Hero() {
 
           <motion.div className="hero__ctas" {...rise(0.48)}>
             <a className="btn btn--glow" href="#work">
-              See the work <ArrowDown size={16} weight="bold" />
+              Explore Projects & Demos <Compass size={18} weight="bold" />
             </a>
             <a className="btn btn--ghost" href="#contact">
-              Say hello <ArrowUpRight size={16} weight="bold" />
+              Let's Connect <ArrowUpRight size={16} weight="bold" />
             </a>
           </motion.div>
         </div>
 
         <div className="hero__terminal-wrap">
-          <HeroCard />
+          <HeroFlipCard />
         </div>
       </div>
     </section>
