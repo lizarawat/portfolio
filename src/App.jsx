@@ -11,6 +11,7 @@ import Record from './components/record/Record.jsx'
 import Credentials from './components/creds/Credentials.jsx'
 import Contact from './components/contact/Contact.jsx'
 import Footer from './components/contact/Footer.jsx'
+import BackgroundWaves from './components/ui/BackgroundWaves.jsx'
 
 export default function App() {
   const themeState = useThemeState()
@@ -20,6 +21,7 @@ export default function App() {
   return (
     <ThemeContext.Provider value={themeState}>
       <MotionConfig reducedMotion="user">
+        <BackgroundWaves />
         <a className="skip" href="#work">Skip to work</a>
         <Nav />
         <main>

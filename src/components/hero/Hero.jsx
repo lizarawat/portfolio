@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { ArrowDown, ArrowUpRight, Sparkle } from '@phosphor-icons/react'
 import { profile } from '../../data/profile.js'
-import DeveloperTerminal from './DeveloperTerminal.jsx'
+import HeroCard from './HeroCard.jsx'
 import './hero.css'
 
 const rise = (delay) => ({
@@ -45,7 +45,7 @@ export default function Hero() {
         </div>
 
         <div className="hero__terminal-wrap">
-          <DeveloperTerminal />
+          <HeroCard />
         </div>
       </div>
     </section>

@@ -137,6 +137,15 @@
   }
 }
 
+@media (max-width: 640px) {
+  .nav__social-text {
+    display: none;
+  }
+  .nav__social {
+    padding: 0 10px;
+  }
+}
+
 @media (max-width: 420px) {
   .nav__cv {
     display: none;

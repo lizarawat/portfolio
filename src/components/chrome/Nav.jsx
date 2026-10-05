@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion, useMotionValueEvent, useScroll, AnimatePresence } from 'motion/react'
-import { Moon, Sun, List, X, DownloadSimple } from '@phosphor-icons/react'
+import { Moon, Sun, List, X, DownloadSimple, GithubLogo, LinkedinLogo } from '@phosphor-icons/react'
 import { useTheme } from '../../hooks/useTheme.js'
 import { profile } from '../../data/profile.js'
 import './nav.css'
@@ -65,6 +65,25 @@ export default function Nav() {
               </motion.span>
             </AnimatePresence>
           </button>
+          
+          <a
+            className="btn btn--sm btn--ghost nav__social"
+            href={profile.github}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub Profile"
+          >
+            <GithubLogo size={16} weight="bold" /> <span className="nav__social-text">GitHub</span>
+          </a>
+          <a
+            className="btn btn--sm btn--ghost nav__social"
+            href={profile.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn Profile"
+          >
+            <LinkedinLogo size={16} weight="bold" /> <span className="nav__social-text">LinkedIn</span>
+          </a>
           <a className="btn btn--sm nav__cv" href={profile.cv} download>
             <DownloadSimple size={16} weight="bold" /> CV
           </a>
