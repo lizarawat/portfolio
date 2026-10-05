@@ -111,6 +111,9 @@
 .hero__terminal-wrap {
   display: flex;
   justify-content: center;
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
+  overflow: visible;
 }
 
 @media (max-width: 900px) {

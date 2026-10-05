@@ -1,11 +1,12 @@
 .flip-card-wrapper {
   width: min(100%, 460px);
   height: 320px;
-  perspective: 1000px;
-  -webkit-perspective: 1000px;
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
   cursor: pointer;
   margin-inline: auto;
   position: relative;
+  overflow: visible !important;
 }
 
 .flip-card-inner {
@@ -14,10 +15,12 @@
   height: 100%;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Slow, smooth 1.2 second 3D flip animation */
+  transition: transform 1.2s cubic-bezier(0.34, 1.2, 0.64, 1);
+  -webkit-transition: -webkit-transform 1.2s cubic-bezier(0.34, 1.2, 0.64, 1);
 }
 
-/* Hover or is-flipped triggers 180deg Y-axis rotation */
+/* On hover or click, turn card around 180 degrees slowly */
 .flip-card-wrapper:hover .flip-card-inner,
 .flip-card-inner.is-flipped {
   transform: rotateY(180deg);
@@ -36,18 +39,18 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: color-mix(in oklab, var(--paper-2) 90%, transparent);
+  background: color-mix(in oklab, var(--paper-2) 92%, transparent);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1.5px solid var(--rule);
   box-shadow: 0 18px 45px -15px rgb(0 0 0 / 0.25);
-  transition: border-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+  transition: border-color 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
 }
 
 .flip-card-wrapper:hover .flip-card-face {
-  border-color: color-mix(in oklab, var(--blue) 50%, transparent);
+  border-color: color-mix(in oklab, var(--blue) 60%, transparent);
   box-shadow: 0 24px 60px -15px var(--glow-blue);
 }
 
@@ -138,7 +141,7 @@
   height: 125px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px.5px solid var(--blue);
+  border: 2.5px solid var(--blue);
   box-shadow: 0 0 30px -4px var(--glow-blue);
   position: relative;
   background: var(--paper);
