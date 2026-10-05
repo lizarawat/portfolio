@@ -19,10 +19,20 @@ export default function HeroFlipCard() {
       onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setIsFlipped((prev) => !prev)}
     >
       <motion.div
-        className={`flip-card-inner ${isFlipped ? 'is-flipped' : ''}`}
-        initial={{ opacity: 0, y: 25, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+        className="flip-card-inner"
+        initial={{ opacity: 0, y: 25, scale: 0.95, rotateY: 0 }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          rotateY: isFlipped ? 180 : 0,
+        }}
+        transition={{
+          rotateY: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+          opacity: { duration: 0.8 },
+          y: { duration: 0.8 },
+        }}
+        style={{ transformStyle: 'preserve-3d' }}
       >
         {/* FRONT FACE: Quote & Tech Badges */}
         <div className="flip-card-face flip-card-front">
@@ -50,19 +60,10 @@ export default function HeroFlipCard() {
           </div>
         </div>
 
-        {/* BACK FACE: Clean Photo Slot & Details */}
+        {/* BACK FACE: Real Photo & Personal Details */}
         <div className="flip-card-face flip-card-back">
           <div className="back-photo-wrapper">
-            {profile.photo ? (
-              <img src={profile.photo} alt={profile.name} className="back-photo-img" />
-            ) : (
-              <div className="back-photo-placeholder">
-                <div className="avatar-ring">
-                  <span className="avatar-initials">{profile.initials}</span>
-                </div>
-                <span className="photo-slot-label mono">Photo Slot</span>
-              </div>
-            )}
+            <img src={profile.photo || '/liza.jpg'} alt={profile.name} className="back-photo-img" />
           </div>
 
           <div className="back-meta">

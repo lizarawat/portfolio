@@ -11,7 +11,7 @@ export const profile = Object.freeze({
   lede: 'I turn very large, very messy datasets into pipelines, models and dashboards that people actually use.',
   objective:
     'To start my career in Data Engineering and Artificial Intelligence, applying my skills to real problems, building scalable systems and growing as an engineer.',
-  photo: null,
+  photo: '/liza.jpg',
   location: 'Phagwara, Punjab, India',
   email: 'rawatliza36@gmail.com',
   phone: '+91 76786 28143',
