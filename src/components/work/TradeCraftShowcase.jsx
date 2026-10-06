@@ -2,11 +2,11 @@ import { ArrowUpRight, GithubLogo, Sparkle, ShieldCheck, ChartLineUp, Newspaper,
 import CandleDemo from '../demos/CandleDemo.jsx'
 import './tradecraft.css'
 
-export default function TradeCraftShowcase({ project, onPreview }) {
+export default function TradeCraftShowcase() {
   return (
     <article className="tc-showcase" id="tradecraft">
       <div className="wrap">
-        {/* Compact Header & Section Title */}
+        {/* Header Tag & Section Title */}
         <div className="tc-showcase__head">
           <div className="tc-showcase__head-top">
             <div className="tc-showcase__tag mono">
@@ -138,31 +138,9 @@ export default function TradeCraftShowcase({ project, onPreview }) {
             </div>
           </div>
 
-          {/* Right Column: BOTH Interactive Chart Simulation AND Real Screenshot Stacked (Zero Empty Space) */}
+          {/* Right Column: Full-Height High-Realism Quantitative Trading Simulator */}
           <div className="tc-showcase__right">
-            {/* Top Box: Live Candle & Timeframe Simulation */}
-            <div className="tc-sim-box">
-              <CandleDemo />
-            </div>
-
-            {/* Bottom Box: Real App Screenshot Card */}
-            <div className="tc-screenshot-box">
-              <div className="tc-screenshot-head">
-                <span className="tc-screenshot-title mono">REAL TRADECRAFT DASHBOARD PREVIEW</span>
-                <span className="tc-screenshot-hint mono">✦ Click to expand</span>
-              </div>
-              <button
-                type="button"
-                className="shot-wrapper"
-                onClick={() => onPreview(project)}
-                aria-label="Open TradeCraft full resolution preview"
-              >
-                <img src="/previews/tradecraft.jpg" alt="Real TradeCraft Trading Desk Dashboard" className="shot-img" />
-                <div className="shot-overlay">
-                  <span>Click to view full-resolution dashboard preview 🔍</span>
-                </div>
-              </button>
-            </div>
+            <CandleDemo />
           </div>
         </div>
       </div>

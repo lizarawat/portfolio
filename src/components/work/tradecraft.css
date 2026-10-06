@@ -210,88 +210,172 @@
   gap: 10px;
 }
 
-/* Right Column Studio Layout (Combined Simulation + Real Screenshot) */
+/* Right Column Studio Layout (Quantitative Trading Terminal) */
 .tc-showcase__right {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
-.tc-sim-box {
-  border-radius: var(--r);
-  background: var(--paper-2);
-  border: 1px solid var(--rule);
-  overflow: hidden;
-  box-shadow: 0 8px 24px -10px rgb(0 0 0 / 0.15);
+.tc-desk-terminal {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.tc-screenshot-box {
-  border-radius: var(--r);
-  background: var(--paper-2);
-  border: 1px solid var(--rule);
-  padding: 12px;
-  box-shadow: 0 8px 24px -10px rgb(0 0 0 / 0.15);
+.tc-desk-terminal .plate {
+  height: 100%;
 }
 
-.tc-screenshot-head {
+.live-clock {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--blue-text);
+  background: color-mix(in oklab, var(--blue) 12%, transparent);
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid color-mix(in oklab, var(--blue) 30%, transparent);
+  margin-right: 4px;
+}
+
+/* Ticker & Interactive Trade Execution Bar */
+.tc-ticker-strip {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding: 10px 14px;
+  background: color-mix(in oklab, var(--paper) 70%, transparent);
+  border-bottom: 1px solid var(--rule);
 }
 
-.tc-screenshot-title {
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: var(--ink-3);
+.ticker-select-group {
+  display: flex;
+  gap: 4px;
 }
 
-.tc-screenshot-hint {
-  font-size: 0.68rem;
-  color: var(--blue-text);
+.tk-pill {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
   font-weight: 600;
-}
-
-.shot-wrapper {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 0;
-  padding: 0;
+  color: var(--ink-2);
+  background: transparent;
+  border: 1px solid transparent;
   cursor: pointer;
-  display: block;
+  transition: all 0.2s ease;
 }
 
-.shot-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s var(--ease-out);
+.tk-pill:hover {
+  color: var(--ink);
+  background: var(--paper-2);
 }
 
-.shot-wrapper:hover .shot-img {
-  transform: scale(1.03);
+.tk-pill.is-active {
+  background: var(--blue);
+  color: #ffffff;
+  border-color: var(--blue);
 }
 
-.shot-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(2px);
+.ticker-price-group {
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 0.85rem;
-  opacity: 0;
-  transition: opacity 0.3s var(--ease-out);
+  gap: 8px;
 }
 
-.shot-wrapper:hover .shot-overlay {
-  opacity: 1;
+.tk-price {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.tk-change {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.tk-change.is-up {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.tk-change.is-down {
+  color: #ec4899;
+  background: rgba(236, 72, 153, 0.12);
+}
+
+.ticker-actions-group {
+  display: flex;
+  gap: 6px;
+}
+
+.trade-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: 0;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.2s ease;
+}
+
+.trade-btn:active {
+  transform: scale(0.95);
+}
+
+.trade-btn--buy {
+  background: #10b981;
+  color: #ffffff;
+  box-shadow: 0 2px 8px -2px rgba(16, 185, 129, 0.4);
+}
+
+.trade-btn--sell {
+  background: #ec4899;
+  color: #ffffff;
+  box-shadow: 0 2px 8px -2px rgba(236, 72, 153, 0.4);
+}
+
+/* Order Toast Notification */
+.order-toast {
+  padding: 8px 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+  border-bottom: 1px solid var(--rule);
+}
+
+.toast-buy {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+.toast-sell {
+  background: rgba(236, 72, 153, 0.15);
+  color: #ec4899;
+}
+
+/* OHLC Banner */
+.tc-ohlc-banner {
+  padding: 6px 14px;
+  font-size: 0.68rem;
+  color: var(--ink-3);
+  background: color-mix(in oklab, var(--paper) 40%, transparent);
+  border-bottom: 1px solid var(--rule);
+}
+
+.tc-ohlc-banner b {
+  color: var(--ink);
 }
 
 @media (max-width: 900px) {
