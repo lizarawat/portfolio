@@ -28,9 +28,10 @@ export default function CandleDemo() {
   const [orderToast, setOrderToast] = useState(null)
 
   // Live real-time clock state
-  const [currentTime, setCurrentTime] = useState(() => new Date().toLocaleTimeString('en-IN', { hour12: false }))
+  const [currentTime, setCurrentTime] = useState('')
 
   useEffect(() => {
+    setCurrentTime(new Date().toLocaleTimeString('en-IN', { hour12: false }))
     const timer = setInterval(() => {
       setCurrentTime(new Date().toLocaleTimeString('en-IN', { hour12: false }))
     }, 1000)
@@ -39,31 +40,38 @@ export default function CandleDemo() {
 
   const candleIntervals = { '1m': 350, '2m': 700, '5m': 1200 }
   const currentInterval = candleIntervals[timeframe] || 500
-
   const tickerInfo = TICKERS[selectedTicker] || TICKERS['RELIANCE']
 
   const sim = useRef(null)
   if (!sim.current || sim.current.ticker !== selectedTicker) {
     const rand = rng(20260601 + selectedTicker.charCodeAt(0))
     const candles = series(VISIBLE + 20, tickerInfo.base, rand)
-    // Generate simulated volumes
     candles.forEach((c) => {
       c.vol = Math.floor(80000 + (rand() * 120000))
     })
     sim.current = { ticker: selectedTicker, rand, candles, live: null, acc: 0, tickAcc: 0 }
   }
 
-  const [read, setRead] = useState(() => {
-    const closes = sim.current.candles.map((c) => c.close)
-    const r = rsi(closes).at(-1)
-    const firstClose = sim.current.candles[0].close
-    const lastClose = closes.at(-1)
-    const diff = lastClose - firstClose
-    const pct = (diff / firstClose) * 100
-    return { price: lastClose, diff, pct, rsi: r, sig: signal(r) }
-  })
+  const [read, setRead] = useState(() => ({
+    price: tickerInfo.base,
+    diff: 0,
+    pct: 0,
+    rsi: 50,
+    sig: 'hold',
+  }))
 
-  // Simulated order placement handler
+  useEffect(() => {
+    if (sim.current && sim.current.candles && sim.current.candles.length > 0) {
+      const closes = sim.current.candles.map((c) => c.close)
+      const r = rsi(closes).at(-1) || 50
+      const firstClose = sim.current.candles[0].close
+      const lastClose = closes.at(-1)
+      const diff = lastClose - firstClose
+      const pct = (diff / firstClose) * 100
+      setRead({ price: lastClose, diff, pct, rsi: r, sig: signal(r) })
+    }
+  }, [selectedTicker])
+
   const handleOrder = (type) => {
     const priceStr = read.price ? read.price.toFixed(2) : '2,642.80'
     setOrderToast({ type, msg: `SIMULATED ORDER EXECUTED: ${type} 50 shares @ ₹${priceStr}` })
@@ -79,7 +87,7 @@ export default function CandleDemo() {
 
     const idx = Math.floor((x - pad) / cw)
     const s = sim.current
-    if (s) {
+    if (s && s.candles) {
       const view = s.candles.slice(-VISIBLE)
       if (idx >= 0 && idx < view.length) {
         setHoverData(view[idx])
@@ -95,11 +103,13 @@ export default function CandleDemo() {
 
   const ref = useCanvas((ctx, { w, h }, _t, dt) => {
     const s = sim.current
+    if (!s || !s.candles) return
+
     if (!paused && !reduce) {
       s.acc += dt * 1000
       s.tickAcc += dt * 1000
       const last = s.candles.at(-1)
-      if (!s.live) {
+      if (last && !s.live) {
         s.live = {
           open: last.close,
           high: last.close,
@@ -109,7 +119,7 @@ export default function CandleDemo() {
         }
       }
 
-      if (s.tickAcc > 70) {
+      if (s.live && s.tickAcc > 70) {
         s.tickAcc = 0
         const step = nextCandle(s.live.close, s.rand, { drift: tickerInfo.drift, vol: 0.003, ticks: 2 })
         s.live = {
@@ -121,12 +131,12 @@ export default function CandleDemo() {
         }
       }
 
-      if (s.acc > currentInterval) {
+      if (s.live && s.acc > currentInterval) {
         s.acc = 0
         s.candles = [...s.candles.slice(-(VISIBLE + 40)), s.live]
         s.live = null
         const closes = s.candles.map((c) => c.close)
-        const r = rsi(closes).at(-1)
+        const r = rsi(closes).at(-1) || 50
         const firstClose = s.candles[Math.max(0, s.candles.length - VISIBLE)].close
         const lastClose = closes.at(-1)
         const diff = lastClose - firstClose
@@ -144,10 +154,11 @@ export default function CandleDemo() {
 
     const all = s.live ? [...s.candles, s.live] : s.candles
     const view = all.slice(-VISIBLE)
+    if (view.length === 0) return
+
     const closes = all.map((c) => c.close)
     const rs = rsi(closes).slice(-VISIBLE)
 
-    // SMA(20) calculation
     const sma20 = view.map((_, i) => {
       const slice = closes.slice(Math.max(0, closes.length - VISIBLE + i - 19), closes.length - VISIBLE + i + 1)
       if (slice.length < 5) return null
@@ -158,12 +169,12 @@ export default function CandleDemo() {
     const volH = h * 0.15
     const volTop = priceH + 8
     const rsiTop = volTop + volH + 12
-    const rsiH = h - rsiTop - 8
+    const rsiH = Math.max(10, h - rsiTop - 8)
     const pad = 12
 
     const hi = Math.max(...view.map((c) => c.high))
     const lo = Math.min(...view.map((c) => c.low))
-    const maxVol = Math.max(...view.map((c) => c.vol || 10000))
+    const maxVol = Math.max(1, ...view.map((c) => c.vol || 10000))
     const span = hi - lo || 1
     const y = (p) => pad + (1 - (p - lo) / span) * (priceH - pad * 2)
     const vy = (v) => volTop + volH - (v / maxVol) * volH
@@ -199,7 +210,7 @@ export default function CandleDemo() {
     ctx.fillText('30', pad + 2, ry(30) - 3)
     ctx.fillText('VOL', pad + 2, volTop + 10)
 
-    // Trendlines (Support & Resistance)
+    // Trendlines
     if (showTrendlines && view.length > 5) {
       const firstX = pad + cw / 2
       const lastX = pad + (view.length - 1) * cw + cw / 2
@@ -256,7 +267,7 @@ export default function CandleDemo() {
       }
     })
 
-    // SMA (20) Cyan Line
+    // SMA (20) Line
     if (showSMA && sma20.length > 0) {
       ctx.strokeStyle = '#06b6d4'
       ctx.lineWidth = 1.5
@@ -279,27 +290,28 @@ export default function CandleDemo() {
 
     ctx.globalCompositeOperation = 'source-over'
 
-    // Last Price Dotted Reference Line
+    // Last Price Dotted Line
     const last = view.at(-1)
-    ctx.strokeStyle = inks.ink
-    ctx.setLineDash([2, 3])
-    ctx.beginPath()
-    ctx.moveTo(pad, y(last.close))
-    ctx.lineTo(w - pad, y(last.close))
-    ctx.stroke()
-    ctx.setLineDash([])
+    if (last) {
+      ctx.strokeStyle = inks.ink
+      ctx.setLineDash([2, 3])
+      ctx.beginPath()
+      ctx.moveTo(pad, y(last.close))
+      ctx.lineTo(w - pad, y(last.close))
+      ctx.stroke()
+      ctx.setLineDash([])
+    }
   })
 
   const isUp = read.diff >= 0
 
   return (
     <div className="tc-desk-terminal">
-      {/* Top Header Plate with Live Time */}
       <Plate
         title="TRADECRAFT DESK"
         tools={
           <>
-            <span className="live-clock mono">{currentTime} IST</span>
+            {currentTime && <span className="live-clock mono">{currentTime} IST</span>}
             <PlateButton active={timeframe === '1m'} onClick={() => setTimeframe('1m')}>1m</PlateButton>
             <PlateButton active={timeframe === '2m'} onClick={() => setTimeframe('2m')}>2m</PlateButton>
             <PlateButton active={timeframe === '5m'} onClick={() => setTimeframe('5m')}>5m</PlateButton>
@@ -311,7 +323,6 @@ export default function CandleDemo() {
           </>
         }
       >
-        {/* Ticker & Interactive Trade Execution Bar */}
         <div className="tc-ticker-strip">
           <div className="ticker-select-group">
             {Object.keys(TICKERS).map((tk) => (
@@ -346,14 +357,12 @@ export default function CandleDemo() {
           </div>
         </div>
 
-        {/* Order Execution Toast Notification */}
         {orderToast && (
           <div className={`order-toast mono ${orderToast.type === 'BUY' ? 'toast-buy' : 'toast-sell'}`}>
             {orderToast.msg}
           </div>
         )}
 
-        {/* Dynamic Hover OHLC Tooltip Banner */}
         <div className="tc-ohlc-banner mono">
           {hoverData ? (
             <span>
@@ -364,7 +373,6 @@ export default function CandleDemo() {
           )}
         </div>
 
-        {/* Canvas Surface */}
         <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} style={{ position: 'relative' }}>
           <canvas ref={ref} className="demo-canvas demo-canvas--candles" role="img" aria-label="Interactive candlestick trading desk canvas" />
         </div>
