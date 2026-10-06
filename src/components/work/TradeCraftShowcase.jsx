@@ -2,7 +2,7 @@ import { ArrowUpRight, GithubLogo, Sparkle, ShieldCheck, ChartLineUp, Newspaper,
 import CandleDemo from '../demos/CandleDemo.jsx'
 import './tradecraft.css'
 
-export default function TradeCraftShowcase() {
+export default function TradeCraftShowcase({ project, onPreview }) {
   return (
     <article className="tc-showcase" id="tradecraft">
       <div className="wrap">
